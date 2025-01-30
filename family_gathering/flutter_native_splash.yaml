@@ -13,3 +13,8 @@ flutter_native_splash:
     color: "#ee0097"
     image: "assets/images/logo2_our_family.png"
     branding: "assets/images/branding_w_our_family.png"
+
+
+
+    # dart run flutter_native_splash:create
+    # dart run flutter_native_splash:create --path=path/to/my/file.yaml

@@ -1,4 +1,4 @@
-import 'package:family_gathering/views/custom_txt_field.dart';
+import 'package:family_gathering/views/widgets/custom_txt_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,6 +23,9 @@ class TxtFieldDigits extends StatelessWidget {
           debugPrint("onChange $val");
           if (val.length == numOfDigits) {
             FocusScope.of(context).nextFocus();
+          }
+          if(val.length == 0){
+            FocusScope.of(context).previousFocus();
           }
         },
         onSaved: (val) {

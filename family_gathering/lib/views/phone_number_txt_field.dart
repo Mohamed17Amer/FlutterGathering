@@ -1,5 +1,5 @@
 import 'package:family_gathering/views/country_picker.dart';
-import 'package:family_gathering/views/txt_field_digits.dart';
+import 'package:family_gathering/views/widgets/txt_field_digits.dart';
 import 'package:flutter/material.dart';
 
 class PhoneNumberTxtField extends StatelessWidget {

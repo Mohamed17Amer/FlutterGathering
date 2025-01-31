@@ -1,4 +1,6 @@
-import 'package:family_gathering/views/custom_txt_field.dart';
+import 'package:family_gathering/screens/sign_in_screen.dart';
+import 'package:family_gathering/views/widgets/custom_elevated_button.dart';
+import 'package:family_gathering/views/widgets/custom_txt_field.dart';
 import 'package:family_gathering/views/phone_number_txt_field.dart';
 import 'package:family_gathering/views/verify_phone_txt_field.dart';
 import 'package:flutter/material.dart';
@@ -21,31 +23,39 @@ class _LoginViewState extends State<LoginView> {
         ),
         child: ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.center,
-          title: ElevatedButton(
-            onPressed: () {},
-            child: Text("👨‍❤️‍💋‍👨👨👶👵 زور عيلتك", textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.purple,
-                  fontSize: 18
-                ),),
+          title: MyElevatedButton(
+            child: Text(
+              "👨‍❤️‍💋‍👨👨👶👵 زور عيلتك",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.purple, fontSize: 18),
+            ),
           ),
           subtitle: Text(
-              "  قَالَ رَسُولُ اللَّهِ ﷺ: مَنْ أَحَبَّ أَنْ يُبْسَطَ له فِي رِزْقِهِ، وأَنْ يُنْسَأَ لَهُ فِي أَثَرِهِ, فَلْيَصِلْ رَحِمَهُ ", style: TextStyle(fontSize: 14),),
+            "  قَالَ رَسُولُ اللَّهِ ﷺ: مَنْ أَحَبَّ أَنْ يُبْسَطَ له فِي رِزْقِهِ، وأَنْ يُنْسَأَ لَهُ فِي أَثَرِهِ, فَلْيَصِلْ رَحِمَهُ ",
+            style: TextStyle(fontSize: 14),
+          ),
           children: [
-            //first
-        
             MyTxtFormField(
               label: "😍😘💕 كود العيلة أو التجمع ",
               hint: "لو مش معاك،اطلبه من أي حد في الجروب",
               onChanged: (val) {},
-              alignLabelWithHint: true, onSaved: (val) {  },
+              alignLabelWithHint: true,
+              onSaved: (val) {},
             ),
-        
-            ElevatedButton(
-              onPressed: () {},
+            MyElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignInScreen(),
+                  ),
+                );
+              },
               child: Text("دخول العيلة"),
             ),
-            SizedBox(height: 10,)
+            SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),

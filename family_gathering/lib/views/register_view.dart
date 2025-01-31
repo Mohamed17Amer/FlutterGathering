@@ -1,4 +1,6 @@
-import 'package:family_gathering/views/custom_txt_field.dart';
+import 'package:family_gathering/screens/sign_up_screen.dart';
+import 'package:family_gathering/views/widgets/custom_elevated_button.dart';
+import 'package:family_gathering/views/widgets/custom_txt_field.dart';
 import 'package:family_gathering/views/phone_number_txt_field.dart';
 import 'package:family_gathering/views/verify_phone_txt_field.dart';
 import 'package:flutter/material.dart';
@@ -21,17 +23,13 @@ class _RegisterViewState extends State<RegisterView> {
         ),
         child: ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.center,
-          title: Padding(
-            padding: const EdgeInsets.all(6.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "👨‍❤️‍💋‍👨👨👶👵 جمع عيلتك",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.purple,
-                  fontSize: 18,
-                ),
+          title: MyElevatedButton(
+            child: Text(
+              "👨‍❤️‍💋‍👨👨👶👵 جمع عيلتك",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.purple,
+                fontSize: 18,
               ),
             ),
           ),
@@ -41,8 +39,6 @@ class _RegisterViewState extends State<RegisterView> {
             style: TextStyle(fontSize: 14),
           ),
           children: [
-            //first
-      
             MyTxtFormField(
               label: "😍😘💕 اسم العيلة أو التجمع",
               hint: " 🤔🤔 اسم عيلتك إيه؟ ",
@@ -52,23 +48,18 @@ class _RegisterViewState extends State<RegisterView> {
               alignLabelWithHint: true,
               onSaved: (val) {},
             ),
-      
             MyTxtFormField(
               label: "احتفظ بكود العيلة اللي هيظهرلك كمان شوية هنا ",
               alignLabelWithHint: true,
               isEnabled: false,
               onSaved: (val) {},
             ),
-      
-            ElevatedButton(
+            MyElevatedButton(
               onPressed: () {},
               child: Text(
                 "إنشاء كود للعيلة أو التجمع الجديد",
                 style: TextStyle(fontSize: 18),
               ),
-            ),
-            SizedBox(
-              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,35 +74,20 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            /*
-            MyTxtFormField(
-              label: "اكتب تليفونك تحت يا عسل ",
-              hint: "اكتب تليفونك بعد كود الدولة يا عسل",
-              alignLabelWithHint: true,
-              isEnabled: false,
-              onSaved: (val) {},
-            ),
-                
-           
-            PhoneNumberTxtField(),
-                
-            ExpansionTile(
-              title: ElevatedButton(
-                onPressed: () {},
-                child: Text(" ابعت كود التحقق"),
+            MyElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignUpScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                "استكمال البيانات لإنشاء المجموعة",
+                style: TextStyle(fontSize: 18),
               ),
-              children: [
-                VerifyNumberTxtField(),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text("تأكيد التحقق"),
-                ),
-              ],
-            )
-            */
+            ),
           ],
         ),
       ),

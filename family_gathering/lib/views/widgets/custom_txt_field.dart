@@ -13,7 +13,8 @@ class MyTxtFormField extends StatelessWidget {
       this.onChanged,
       this.onSaved,
       this.maxLength,
-      this.padding, this.maxLines});
+      this.padding, this.maxLines, 
+      this.suffixIcon});
 
   final String? label;
   final String? hint;
@@ -24,6 +25,7 @@ class MyTxtFormField extends StatelessWidget {
   final int? maxLength;
   final int? maxLines;
   final double? padding;
+  final Widget? suffixIcon;
   final Function(String)? onChanged;
   final Function(String)? onSaved;
 
@@ -37,6 +39,7 @@ class MyTxtFormField extends StatelessWidget {
           labelText: label,
           hintText: hint,
         //  alignLabelWithHint: ,
+        suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
             borderSide: BorderSide(
@@ -51,6 +54,7 @@ class MyTxtFormField extends StatelessWidget {
         onChanged: onChanged,
         maxLength: maxLength,
         maxLines: maxLines??1,
+        
       ),
     );
   }

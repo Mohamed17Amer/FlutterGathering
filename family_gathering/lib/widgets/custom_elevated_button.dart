@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyElevatedButton extends StatelessWidget {
-  MyElevatedButton(
+  const MyElevatedButton(
       {super.key,
       this.height,
       this.width,
@@ -12,7 +12,7 @@ class MyElevatedButton extends StatelessWidget {
   final double? height;
   final double? width;
   final double? padding;
-  Widget? child;
+  final Widget? child;
   final Function()? onPressed;
 
   @override
@@ -20,11 +20,9 @@ class MyElevatedButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: ElevatedButton(
-        onPressed: onPressed,
-        child: child, // ignore: sort_child_properties_last
         style: ButtonStyle(
           padding: WidgetStateProperty.all(
-            EdgeInsets.symmetric(horizontal:  padding ?? 4.0,vertical: 2),
+            EdgeInsets.symmetric(horizontal: padding ?? 4.0, vertical: 2),
           ),
           backgroundColor: WidgetStateProperty.all(Colors.white),
           fixedSize: WidgetStateProperty.all(
@@ -34,6 +32,8 @@ class MyElevatedButton extends StatelessWidget {
             ),
           ),
         ),
+        onPressed: onPressed,
+        child: child,
       ),
     );
   }

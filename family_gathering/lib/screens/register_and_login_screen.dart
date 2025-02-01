@@ -13,24 +13,15 @@ class _RegisterAndLoginScreenState extends State<RegisterAndLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                RegisterView(),
-                SizedBox(
-                  height: 24,
-                ),
-                LoginView(),
-                SizedBox(
-                  height: 24,
-                ),
-              ],
-            ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              RegisterView(),
+              LoginView(),
+            ],
           ),
         ),
       ),

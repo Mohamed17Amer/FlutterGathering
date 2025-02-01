@@ -1,8 +1,7 @@
 import 'package:family_gathering/screens/sign_in_screen.dart';
-import 'package:family_gathering/views/widgets/custom_elevated_button.dart';
-import 'package:family_gathering/views/widgets/custom_txt_field.dart';
-import 'package:family_gathering/views/phone_number_txt_field.dart';
-import 'package:family_gathering/views/verify_phone_txt_field.dart';
+import 'package:family_gathering/widgets/custom_txt.dart';
+import 'package:family_gathering/widgets/custom_txt_field.dart';
+import 'package:family_gathering/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -17,6 +16,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Form(
       child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.purple, width: 2),
           borderRadius: BorderRadius.circular(10),
@@ -24,22 +24,22 @@ class _LoginViewState extends State<LoginView> {
         child: ExpansionTile(
           expandedCrossAxisAlignment: CrossAxisAlignment.center,
           title: MyElevatedButton(
-            child: Text(
-              "👨‍❤️‍💋‍👨👨👶👵 زور عيلتك",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.purple, fontSize: 18),
-            ),
+            child: MyText(
+                text: "👨‍❤️‍💋‍👨👨👶👵 زور عيلتك", color: Colors.purple),
           ),
-          subtitle: Text(
-            "  قَالَ رَسُولُ اللَّهِ ﷺ: مَنْ أَحَبَّ أَنْ يُبْسَطَ له فِي رِزْقِهِ، وأَنْ يُنْسَأَ لَهُ فِي أَثَرِهِ, فَلْيَصِلْ رَحِمَهُ ",
-            style: TextStyle(fontSize: 14),
+          subtitle: MyText(
+            text:
+                "  قَالَ رَسُولُ اللَّهِ ﷺ: مَنْ أَحَبَّ أَنْ يُبْسَطَ له فِي رِزْقِهِ، وأَنْ يُنْسَأَ لَهُ فِي أَثَرِهِ, فَلْيَصِلْ رَحِمَهُ ",
+            fontSize: 14.00,
+            maxLines: 3,
           ),
           children: [
             MyTxtFormField(
               label: "😍😘💕 كود العيلة أو التجمع ",
               hint: "لو مش معاك،اطلبه من أي حد في الجروب",
-              onChanged: (val) {},
+           
               alignLabelWithHint: true,
+              onChanged: (val) {},
               onSaved: (val) {},
             ),
             MyElevatedButton(
@@ -51,11 +51,10 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 );
               },
-              child: Text("دخول العيلة"),
+              child: MyText(
+                text: "دخول العيلة",
+              ),
             ),
-            SizedBox(
-              height: 10,
-            )
           ],
         ),
       ),

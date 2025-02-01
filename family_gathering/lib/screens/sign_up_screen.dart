@@ -1,5 +1,6 @@
-import 'package:family_gathering/views/widgets/custom_elevated_button.dart';
-import 'package:family_gathering/views/widgets/custom_txt_field.dart';
+import 'package:family_gathering/widgets/custom_txt.dart';
+import 'package:family_gathering/widgets/custom_txt_field.dart';
+import 'package:family_gathering/widgets/custom_elevated_button.dart';
 import 'package:family_gathering/views/phone_number_txt_field.dart';
 import 'package:family_gathering/views/verify_phone_txt_field.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +26,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             children: [
               MyElevatedButton(
                 width: 320,
-                child: Text(
-                  " يلا نكمل البيانات يا جميل  ",
-                  style: TextStyle(
-                    color: Colors.purple,
-                    fontSize: 30,
-                  ),
-                  textAlign: TextAlign.center,
+                child: MyText(
+                  text: " يلا نكمل البيانات يا جميل  ",
+                  fontSize: 30,
+                  color: Colors.purple,
                 ),
               ),
               MyTxtFormField(
@@ -45,27 +43,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ExpansionTile(
                 title: MyElevatedButton(
                   onPressed: () {},
-                  child: Text(" ابعت كود التحقق"),
+                  child: MyText(text: " ابعت كود التحقق"),
                 ),
                 children: [
                   VerifyNumberTxtField(),
                   MyElevatedButton(
                     onPressed: () {},
-                    child: Text("تأكيد التحقق"),
+                    child: MyText(text: "تأكيد التحقق"),
                   ),
                 ],
               ),
               ExpansionTile(
-                title: Text(" "),
+                title: MyText(text: " "),
                 children: [
                   MyTxtFormField(
                     label: "😊اكتب كلمة المرور",
                     hint: "😂😂 أوعى تنساها بعد لما تكتبها ",
                     maxLength: 9,
                     maxLines: 1,
-                    onChanged: (val) {},
                     alignLabelWithHint: true,
-                    suffixIcon: Icon(Icons.remove_red_eye),
+                    suffixIcon: Icon(Icons.password_rounded),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (val) {},
                     onSaved: (val) {},
                   ),
                   MyTxtFormField(
@@ -73,17 +72,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     hint: "😅😅 نفس اللي فوق يا حاج",
                     maxLength: 9,
                     maxLines: 1,
-                    onChanged: (val) {},
                     alignLabelWithHint: true,
+                    suffixIcon: Icon(Icons.password),
+                    keyboardType: TextInputType.visiblePassword,
+                    onChanged: (val) {},
                     onSaved: (val) {},
-                    suffixIcon: Icon(Icons.remove_red_eye),
                   ),
-
                   MyElevatedButton(
                     onPressed: () {},
-                      child: Text("إنشاء المجموعة والملف الشخصي الخاص بي"),
+                    child:
+                        MyText(text: "إنشاء المجموعة والملف الشخصي الخاص بي"),
                   ),
-                  
                 ],
               ),
             ],

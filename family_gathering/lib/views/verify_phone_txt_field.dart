@@ -1,4 +1,4 @@
-import 'package:family_gathering/views/widgets/txt_field_digits.dart';
+import 'package:family_gathering/widgets/custom_digit_field.dart';
 import 'package:flutter/material.dart';
 
 class VerifyNumberTxtField extends StatelessWidget {

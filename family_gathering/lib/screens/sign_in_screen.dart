@@ -1,8 +1,6 @@
-import 'package:family_gathering/views/widgets/custom_elevated_button.dart';
-import 'package:family_gathering/views/widgets/custom_txt_field.dart';
-
-import 'package:family_gathering/views/phone_number_txt_field.dart';
-import 'package:family_gathering/views/verify_phone_txt_field.dart';
+import 'package:family_gathering/widgets/custom_txt.dart';
+import 'package:family_gathering/widgets/custom_txt_field.dart';
+import 'package:family_gathering/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -26,12 +24,12 @@ class _SignInScreenState extends State<SignInScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 MyElevatedButton(
-                  height: 100,
+                  width: 320,
+                  height: 80,
                   onPressed: () {},
-                  child: const Text(
-                    "يلا نسجل الدخول علشان نزور أهالينا يا جميل ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.purple, fontSize: 22),
+                  child: const MyText(
+                    text: "يلا نسجل الدخول علشان نزور أهالينا يا جميل ",
+                    maxLines: 2,
                   ),
                 ),
                 MyTxtFormField(
@@ -39,26 +37,29 @@ class _SignInScreenState extends State<SignInScreen> {
                   hint: "😂😂 أوعى تكون نسيتها ",
                   maxLength: 9,
                   maxLines: 1,
-                  onChanged: (val) {},
+                
                   alignLabelWithHint: true,
                   suffixIcon: Icon(Icons.remove_red_eye),
+                    onChanged: (val) {},
                   onSaved: (val) {},
                 ),
                 MyElevatedButton(
                   onPressed: () {},
-                  child: Text("الدخول إلى تجمع عائلتي باستخدام هذا الهاتف"),
+                  child: MyText(
+                    text: "الدخول إلى تجمع عائلتي باستخدام هذا الهاتف",
+                    fontSize: 16,
+                  ),
                 ),
                 Column(
                   children: [
-                    Text("😓😓 نسيت كلمة السر يا فالح؟"),
+                    MyText(text: "😓😓 نسيت كلمة السر يا فالح؟"),
                     SizedBox(
                       height: 10,
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: Text(
-                        "😡😡 طب اضغط هنا",
-                        style: TextStyle(fontSize: 20),
+                      child: MyText(
+                        text: "😡😡 طب اضغط هنا",
                       ),
                     ),
                     SizedBox(
@@ -69,9 +70,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         TextButton(
                           onPressed: () {},
-                          child: Text("😊 طب سجل الآن"),
+                          child: MyText(text: "😊 طب سجل الآن"),
                         ),
-                        Text("😥😥 ليس لديك حساب؟"),
+                        MyText(text: "😥😥 ليس لديك حساب؟"),
                       ],
                     ),
                   ],

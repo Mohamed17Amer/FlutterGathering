@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:family_gathering/models/contact_way_model.dart';
 import 'package:flutter/material.dart';
 
 Iterable<Locale> supportedLocales = const [
@@ -80,4 +81,25 @@ Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegatesconst = [
   //GlobalWidgetsLocalizations.delegate,
 ];
 
-Color? backgroundColor = const  Color(0XFFee0097);
+Color? backgroundColor = const Color(0XFFee0097);
+
+final String imgPath = "assets/images/";
+
+final List<ConnectionWayModel> connectionWaysList = [
+  ConnectionWayModel(contactImgPath: "$imgPath" "call.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "sms.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath:  "$imgPath" "whatsapp.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "telegram.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "facebook.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath:  "$imgPath" "x.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "messenger.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "instagram.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "gmail.svg", onContactWayPressed: (){}),
+
+  ConnectionWayModel(contactImgPath: "$imgPath" "yahoo.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "youtube.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "tiktok.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "linkedin.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "instapay.svg", onContactWayPressed: (){}),
+  ConnectionWayModel(contactImgPath: "$imgPath" "paypal.svg", onContactWayPressed: (){}),
+];

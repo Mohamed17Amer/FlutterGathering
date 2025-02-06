@@ -1,4 +1,5 @@
 import 'package:family_gathering/screens/register_and_login_screen.dart';
+import 'package:family_gathering/screens/starting_family_gathering_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -28,13 +29,14 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
       title: 'عيلتنا متجمعة',
       theme: ThemeData(
         scaffoldBackgroundColor: backgroundColor,
+       
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      supportedLocales:  supportedLocales, //constants file
-      localizationsDelegates:localizationsDelegatesconst, //constants file
-      home: const RegisterAndLoginScreen(),
+      supportedLocales: supportedLocales, //constants file
+      localizationsDelegates: localizationsDelegatesconst, //constants file
+      home: const StartingFamilyGatheringApp(),
     );
   }
 }

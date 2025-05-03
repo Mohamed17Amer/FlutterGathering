@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "920005911914",
+    "project_id": "familly-gathering",
+    "storage_bucket": "familly-gathering.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920005911914:android:995c8f9e0bddb484877113",
+        "android_client_info": {
+          "package_name": "com.example.family_gathering_v_0"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7KihxkQSmI8jaRpPBXA7eBsLNKz-OB-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

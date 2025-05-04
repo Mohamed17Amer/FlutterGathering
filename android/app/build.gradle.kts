@@ -7,9 +7,8 @@ plugins {
 }
 
 android {
-  
     namespace = "com.example.family_gathering_v_0"
-    compileSdk = flutter.compileSdkVersion
+    compileSdkVersion flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -22,12 +21,10 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TODO: Specify your own unique Application ID.
         applicationId = "com.example.family_gathering_v_0"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23
-        targetSdk = flutter.targetSdkVersion
+        minSdkVersion = 23
+        targetSdkVersion = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -35,7 +32,6 @@ android {
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -45,24 +41,16 @@ flutter {
     source = "../.."
 }
 
-
 dependencies {
-  // Import the Firebase BoM
-  implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
 
+    // Firebase Analytics
+    implementation("com.google.firebase:firebase-analytics")
+    
+    // Import the BoM for the Firebase platform (another version?)
+    implementation(platform("com.google.firebase:firebase-bom:33.12.0")) 
 
-  // TODO: Add the dependencies for Firebase products you want to use
-  // When using the BoM, don't specify versions in Firebase dependencies
-  implementation("com.google.firebase:firebase-analytics")
-
-
-  // Add the dependencies for any other desired Firebase products
-  // https://firebase.google.com/docs/android/setup#available-libraries
-
-      // Import the BoM for the Firebase platform
-    implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
-
-    // Add the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
+    // Firebase Authentication
     implementation("com.google.firebase:firebase-auth")
 }

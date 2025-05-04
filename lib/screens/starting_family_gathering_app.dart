@@ -22,7 +22,7 @@ class _StartingScreenState
     extends State<StartingScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _bottomNavigationBarPages = const [
+  final List<Widget> _bottomNavigationBarPages =  [
     HomeScreen(),
     ManageScreen(),
     SettingsScreen(),

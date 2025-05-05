@@ -15,10 +15,9 @@ class VerifyNumberTxtField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
              
-            TxtFieldDigits(1),
-            TxtFieldDigits(1),
-            TxtFieldDigits(1),
-            TxtFieldDigits(1),
+            TxtFieldDigits(2),
+            TxtFieldDigits(2),
+            TxtFieldDigits(2),
           ],
         ),
       ),

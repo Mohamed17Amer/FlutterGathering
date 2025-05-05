@@ -1,6 +1,7 @@
 
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
+import 'package:family_gathering_v_0/screens/test.dart';
 import 'package:flutter/material.dart';
 
 import '../models/member_conniction_way_model.dart';
@@ -13,6 +14,7 @@ Map<String, Widget Function(BuildContext)> KRoutesMap = {
   SignInScreen.id: (context) => const SignInScreen(),
   StartingScreen.id: (context)=> const StartingScreen(),
   HomeScreen.id: (context) => const HomeScreen(),
+  PhoneAuthScreen.id: (context) => const PhoneAuthScreen(),
 };
 String KMembersProfileBox = "members_profile_box";
 Iterable<Locale> KSupportedLocales = const [

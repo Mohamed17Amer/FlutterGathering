@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     title: MyElevatedButton(
                       onPressed: () async {
                         setState(() {
-                          verifyPhoneNumber("+201011245647");
+                          _sendOTP("+201011245647");
                         });
                       },
                       child: MyText(text: " ابعت كود التحقق"),
@@ -64,7 +64,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       VerifyNumberTxtField(),
                       MyElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _verifyCode("123456");
+                          setState(() {
+                          });
+                        },
                         child: MyText(text: "تأكيد التحقق"),
                       ),
                     ],
@@ -113,45 +117,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void verifyPhoneNumber(String phoneNumber) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
+  Future<void> _sendOTP(String phone) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phone,
+      timeout: Duration(seconds: 60),
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        // Auto-retrieval or instant verification
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        _showMessage('Phone number automatically verified and user signed in.');
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        _showMessage('Verification failed: ${e.message}');
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        this.verificationId = verificationId;
+        _showMessage('OTP sent. Please check your phone.');
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        this.verificationId = verificationId;
+      },
+    );
+  }
+
+  Future<void> _verifyCode(String otp) async {
     try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+201120185731',
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await auth.signInWithCredential(credential);
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          if (e.code == 'invalid-phone-number') {
-            print('The provided phone number is not valid.');
-          }
-        },
-        codeSent: (String verificationId, int? resendToken) async {
-          // Update the UI - wait for the user to enter the SMS code
-          String smsCode = 'xxxx';
-
-          // Create a PhoneAuthCredential with the code
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-            verificationId: verificationId,
-            smsCode: smsCode,
-          );
-
-          // Sign the user in (or link) with the credential
-      //    await auth.signInWithCredential(credential);
-        },
-        timeout: const Duration(seconds: 60),
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Auto-resolution timed out...
-        },
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: otp,
       );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'invalid-phone-number') {
-        print('The provided phone number is not valid.');
-      } else {
-        print('Error: ${e.message}');
-      }
-    } on Exception catch (e) {
-      print('Error verifying phone number: $e');
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      _showMessage('Phone number verified and user signed in.');
+    } catch (e) {
+      _showMessage('Error verifying code: $e');
     }
   }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+
 }

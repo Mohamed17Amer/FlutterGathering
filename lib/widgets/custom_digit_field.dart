@@ -1,10 +1,20 @@
+import 'package:family_gathering_v_0/cubits/cubit/cubit/phone_number_cubit.dart';
+import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class TxtFieldDigits extends StatelessWidget {
+class TxtFieldDigits extends StatefulWidget {
   const TxtFieldDigits(this.numOfDigits, {super.key});
   final int? numOfDigits;
 
+  @override
+  State<TxtFieldDigits> createState() => _TxtFieldDigitsState();
+}
+
+class _TxtFieldDigitsState extends State<TxtFieldDigits> {
+  RegisterCubit registerCubit = RegisterCubit();
+  PhoneNumberCubit phoneNumberCubit = PhoneNumberCubit();
+TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -13,34 +23,31 @@ class TxtFieldDigits extends StatelessWidget {
         width: 60,
         height: 80,
         child: TextFormField(
+          controller: controller,
           textAlign: TextAlign.center,
-          maxLength: numOfDigits,
+          maxLength: widget.numOfDigits,
           keyboardType: TextInputType.number,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(numOfDigits),
+            LengthLimitingTextInputFormatter(widget.numOfDigits),
           ],
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(7),
-              borderSide: BorderSide(
-                color: Colors.black,
-              ),
+              borderSide: BorderSide(color: Colors.black),
               gapPadding: 2.00,
             ),
           ),
           onChanged: (val) {
-            debugPrint("onChange $val");
-            if (val.length == numOfDigits) {
-              FocusScope.of(context).nextFocus();
-            }
-            // ignore: prefer_is_empty
-            if (val.length == 0) {
-              FocusScope.of(context).previousFocus();
-            }
           },
-          onSaved: (val) {
-            debugPrint("onSaved  $val");
+          
+         
+
+          validator: (val) {
+            debugPrint("validator $val");
+          
+            setState(() {});
+            return null;
           },
         ),
       ),

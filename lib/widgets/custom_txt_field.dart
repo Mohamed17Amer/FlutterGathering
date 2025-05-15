@@ -18,6 +18,7 @@ class MyTxtFormField extends StatelessWidget {
     this.suffixIcon,
     this.controller,
     this.decoration,
+    this.onValidate,
   });
 
   final String? label;
@@ -35,6 +36,7 @@ class MyTxtFormField extends StatelessWidget {
   final InputDecoration? decoration;
   final Function(String)? onChanged;
   final Function(String)? onSaved;
+  final String? Function(String?)? onValidate;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class MyTxtFormField extends StatelessWidget {
         vertical: 6.00,
       ),
       child: TextFormField(
+        controller: controller,
         textAlign: TextAlign.center,
         keyboardType: keyboardType,
         enabled: isEnabled,
@@ -60,6 +63,7 @@ class MyTxtFormField extends StatelessWidget {
           ),
         ),
         onChanged: onChanged,
+        validator: onValidate,
       ),
     );
   }

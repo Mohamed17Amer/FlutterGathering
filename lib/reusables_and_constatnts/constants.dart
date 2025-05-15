@@ -10,7 +10,7 @@ import '../screens/sign_in_screen.dart';
 import '../screens/sign_up_screen.dart';
 
 Map<String, Widget Function(BuildContext)> KRoutesMap = {
-  SignUpScreen.id: (context) => const SignUpScreen(),
+  SignUpScreen.id: (context) =>  SignUpScreen(),
   SignInScreen.id: (context) => const SignInScreen(),
   StartingScreen.id: (context)=> const StartingScreen(),
   HomeScreen.id: (context) => const HomeScreen(),

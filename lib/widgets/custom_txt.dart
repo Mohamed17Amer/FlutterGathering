@@ -15,7 +15,10 @@ class MyText extends StatelessWidget {
       style: TextStyle(
         fontSize: fontSize ?? 18,
         color: color,
+        
+      
       ),
+      
     );
   }
 }

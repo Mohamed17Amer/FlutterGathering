@@ -22,5 +22,5 @@ void main() async{
     options : DefaultFirebaseOptions.currentPlatform,
     );
  
-runApp(const FamilyGatheringApp());
+runApp( FamilyGatheringApp());
 }

@@ -3,12 +3,21 @@ import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 part 'phone_number_state.dart';
 
+
 class PhoneNumberCubit extends Cubit<PhoneNumberState> {
   PhoneNumberCubit() : super(PhoneNumberInitial());
-  static String phoneNumber = " ";
+  static String phoneNumber = "";
   static String countryCode = "+20";
   TextEditingController phonenNumberContoller = TextEditingController();
+    ExpansionTileController otpExpansionController = ExpansionTileController();
+    RegisterCubit registerCubit = RegisterCubit();
 
+  bool? isPhoneNumberValid ;
+
+  void setIsPhoneValid(bool val) {
+    isPhoneNumberValid = val;
+    emit(PhoneNumberValid());
+  }
 
   setCountryCode(String code) {
     countryCode = code;
@@ -17,31 +26,41 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
   }
 
   clearPhoneNumber() {
-    phoneNumber = " ";
+    phoneNumber = "";
     emit(PhoneNumberInitial());
   }
 
   validateTyping(String phone) {
     phoneNumber = phone;
+    setIsPhoneValid(false);
     emit(PhoneNumberIsTyping());
 
- if (phone[0] == "0") {
+    if (phone.isNotEmpty && phone[0] == "0") {
+      setIsPhoneValid(false);
       emit(PhoneNumberIsTyping());
 
       return "الرقم  مفروض يبدأ ب 1";
-    }
-    if (phone.length < 10) {
+    } else if (phone.length < 10) {
+      setIsPhoneValid(false);
       emit(PhoneNumberIsTyping());
 
       return "لازم الرقم يكون 10 أرقام";
+    } else if (phone.length == 10) {
+      setIsPhoneValid(true); 
+      
+      
+      emit(PhoneNumberValid());
     }
 
-   
     emit(PhoneNumberIsTyping());
+  }
 
-    return "الرقم  مفروض يبدا ب 1";
+  openValidationExpansionTile(String phone) {
+    if(phone.length==10) {
+      otpExpansionController.expand();
 
-    // otpExpansionController.expand();
-    // registerCubit.sendOTP(countryCode+phoneNumber);
+      
+    }
+    emit(PhoneNumberValid());
   }
 }

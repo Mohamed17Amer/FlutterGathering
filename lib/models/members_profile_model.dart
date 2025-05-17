@@ -7,16 +7,16 @@ part 'members_profile_model.g.dart';
 @HiveType(typeId: 0)
 class MemberProfileModel extends HiveObject {
   @HiveField(0) 
-  final String? img;
+   String? img;
   @HiveField(1)
-  final String? name;
+   String? name;
   @HiveField(2)
-  final String? phone;
+    String? phone;
 
   @HiveField(3)
-  final AddressModel? fromAddress;
+   AddressModel? fromAddress;
   @HiveField(4)
-  final AddressModel? livingAddress;
+   AddressModel? livingAddress;
 
    Map<String?, String?>? memberConnectionMap;
 

@@ -1,18 +1,20 @@
-
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:family_gathering_v_0/screens/sign_in_screen.dart';
 import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
 import 'package:family_gathering_v_0/screens/test.dart';
 import 'package:flutter/material.dart';
 
 import '../models/member_conniction_way_model.dart';
 import '../screens/home_screen.dart';
-import '../screens/sign_in_screen.dart';
+import '../screens/select_group_screen.dart';
 import '../screens/sign_up_screen.dart';
 
 Map<String, Widget Function(BuildContext)> KRoutesMap = {
-  SignUpScreen.id: (context) =>  SignUpScreen(),
-  SignInScreen.id: (context) => const SignInScreen(),
-  StartingScreen.id: (context)=> const StartingScreen(),
+  SignUpScreen.id: (context) => SignUpScreen(),
+  SignInScreen.id: (context) => SignInScreen(),
+
+  SelectGroupScreen.id: (context) => const SelectGroupScreen(),
+  StartingScreen.id: (context) => const StartingScreen(),
   HomeScreen.id: (context) => const HomeScreen(),
   PhoneAuthScreen.id: (context) => const PhoneAuthScreen(),
 };
@@ -87,7 +89,7 @@ Iterable<Locale> KSupportedLocales = const [
   Locale("ur"),
   Locale("uz"),
   Locale("vi"),
-  Locale("zh")
+  Locale("zh"),
 ];
 
 Iterable<LocalizationsDelegate<dynamic>>? KLocalizationsDelegatesconst = [
@@ -98,57 +100,103 @@ Iterable<LocalizationsDelegate<dynamic>>? KLocalizationsDelegatesconst = [
 
 Color? KBackgroundColor = const Color(0XFFee0097);
 
-
-  final List<String> KConnectionWaysLabelsList = [
-    "القرية",
-    "المدينة",
-    "المحافظة",
-    "الدولة",
-  ]; 
+final List<String> KConnectionWaysLabelsList = [
+  "القرية",
+  "المدينة",
+  "المحافظة",
+  "الدولة",
+];
 final String KImgsPath = "assets/images/";
 
 final List<MemberConnectionWayModel> connectionWaysList = [
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "call.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "call.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "sms.svg", onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "sms.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "whatsapp.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "whatsapp.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "telegram.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "telegram.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "facebook.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "facebook.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "x.svg", onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "x.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "messenger.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "messenger.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "instagram.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "instagram.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "gmail.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "gmail.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "yahoo.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "yahoo.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "youtube.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "youtube.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "tiktok.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "tiktok.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "linkedin.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "linkedin.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "instapay.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "instapay.svg",
+    onConnectionWayPressed: () {},
+  ),
   MemberConnectionWayModel(
-      connectionImgPath: "$KImgsPath" "paypal.svg",
-      onConnectionWayPressed: () {}),
+    connectionImgPath:
+        "$KImgsPath"
+        "paypal.svg",
+    onConnectionWayPressed: () {},
+  ),
 ];

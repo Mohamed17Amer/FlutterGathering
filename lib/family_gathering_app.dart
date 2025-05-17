@@ -1,6 +1,11 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/phone_number_cubit.dart';
+import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
+import 'package:family_gathering_v_0/models/members_profile_model.dart';
+import 'package:family_gathering_v_0/screens/profile_screen.dart';
+import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:family_gathering_v_0/screens/sign_up_screen.dart';
+import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:toastification/toastification.dart';
@@ -32,6 +37,8 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
         providers: [
           BlocProvider(create: (context) => RegisterCubit()),
           BlocProvider(create: (context) => PhoneNumberCubit()),
+          BlocProvider(create: (context) => ProfileCubit(MemberProfileModel())),
+
         ],
 
         child: MaterialApp(
@@ -46,7 +53,7 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
           debugShowCheckedModeBanner: false,
           supportedLocales: KSupportedLocales, //constants file
           localizationsDelegates: KLocalizationsDelegatesconst, //constants file
-          initialRoute: SignUpScreen.id,
+          initialRoute: SelectGroupScreen.id,
         ),
       ),
     );

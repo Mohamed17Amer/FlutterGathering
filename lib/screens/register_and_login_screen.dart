@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../views/login_view.dart';
+import 'sign_in_screen.dart';
 import '../views/register_view.dart';
 
 class RegisterAndLoginScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _RegisterAndLoginScreenState extends State<RegisterAndLoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               RegisterView(),
-              LoginView(),
+              SignInScreen(),
             ],
           ),
         ),

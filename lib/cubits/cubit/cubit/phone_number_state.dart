@@ -7,3 +7,4 @@ final class PhoneNumberInitial extends PhoneNumberState {}
 final class PhoneNumberIsTyping extends PhoneNumberState {}
 final class ChangeCountryCode extends PhoneNumberState {}
 final class PhoneNumberError extends PhoneNumberState {}
+final class PhoneNumberValid extends PhoneNumberState {}

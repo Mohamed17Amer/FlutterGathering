@@ -64,6 +64,7 @@ class MyTxtFormField extends StatelessWidget {
         ),
         onChanged: onChanged,
         validator: onValidate,
+        autovalidateMode: AutovalidateMode.always,
       ),
     );
   }

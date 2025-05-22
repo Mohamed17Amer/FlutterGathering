@@ -1,9 +1,6 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/phone_number_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
-import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
-import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:family_gathering_v_0/views/country_picker.dart';
-import 'package:family_gathering_v_0/widgets/custom_elevated_button.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt_button.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt_field.dart';
 import 'package:flutter/material.dart';

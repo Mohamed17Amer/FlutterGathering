@@ -1,13 +1,12 @@
+import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/sign_up_screen.dart';
-import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
-import 'package:family_gathering_v_0/views/groups_over_view_list_view.dart';
-import 'package:family_gathering_v_0/screens/sign_in_screen.dart';
+import 'package:family_gathering_v_0/views/groups_view_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_txt.dart';
-import '../widgets/custom_txt_field.dart';
 
 class SelectGroupScreen extends StatelessWidget {
   static final id = "/select_group_screen";
@@ -15,6 +14,7 @@ class SelectGroupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -35,7 +35,10 @@ class SelectGroupScreen extends StatelessWidget {
                     ),
                   ),
 
-                     SizedBox(height: 400, child: GroupsView(),),
+                  SizedBox(
+                    height: 400,
+                    child: GroupsView(),
+                  ),
                   SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +48,10 @@ class SelectGroupScreen extends StatelessWidget {
                           navigateTo(context, SignUpScreen.id);
                         },
 
-
-                        child: MyText(text: "😊 طب سجل الآن", 
-                        color: Colors.purple,),
+                        child: MyText(
+                          text: "😊 طب سجل الآن",
+                          color: Colors.purple,
+                        ),
                       ),
                       MyText(text: "😥😥 ليس لديك حساب؟"),
                     ],

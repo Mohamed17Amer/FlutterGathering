@@ -45,26 +45,31 @@ class MyTxtFormField extends StatelessWidget {
         horizontal: padding ?? 18.00,
         vertical: 6.00,
       ),
-      child: TextFormField(
-        controller: controller,
-        textAlign: TextAlign.center,
-        keyboardType: keyboardType,
-        enabled: isEnabled,
-        maxLength: maxLength ?? 9,
-        maxLines: 1,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: hint,
-          alignLabelWithHint: alignLabelWithHint ?? false,
-          suffixIcon: suffixIcon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
-            borderSide: BorderSide(color: Colors.black),
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: TextFormField(
+          controller: controller,
+          textAlign: TextAlign.center,
+          keyboardType: keyboardType,
+          enabled: isEnabled,
+          maxLength: maxLength ?? 9,
+          maxLines: 1,
+          
+          decoration: InputDecoration(
+            
+            labelText: label,
+            hintText: hint,
+            alignLabelWithHint: true,
+            suffixIcon: suffixIcon,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(7),
+              borderSide: BorderSide(color: Colors.black),
+            ),
           ),
+          onChanged: onChanged,
+          validator: onValidate,
+          autovalidateMode: AutovalidateMode.always,
         ),
-        onChanged: onChanged,
-        validator: onValidate,
-        autovalidateMode: AutovalidateMode.always,
       ),
     );
   }

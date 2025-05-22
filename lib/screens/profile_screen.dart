@@ -1,4 +1,3 @@
-import 'dart:io' show File;
 
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
@@ -9,7 +8,6 @@ import 'package:family_gathering_v_0/widgets/custom_txt.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatelessWidget {
   static String id = "/profile_screen";
@@ -18,6 +16,8 @@ class ProfileScreen extends StatelessWidget {
   List<DropDownTextFieldItemModelModel> connectionWaysValuesList = [
     DropDownTextFieldItemModelModel(),
   ];
+
+  ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

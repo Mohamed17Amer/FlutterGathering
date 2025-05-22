@@ -1,12 +1,12 @@
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
-import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:family_gathering_v_0/screens/sign_in_screen.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt.dart';
 import 'package:flutter/material.dart';
 
 class GroupViewItem extends StatelessWidget {
-  GroupViewItem({ this.color, super.key});
+  GroupViewItem({super.key, this.color, this.familyName, });
   Color? color=Colors.purple;
+  String? familyName;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,11 +28,9 @@ class GroupViewItem extends StatelessWidget {
             border: Border.all(color: color!, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [MyText(text: "اسم العيلة"), MyText(text: " كود العيلة ")],
-          ),
+          child: Center(
+            child:MyText(text: familyName!)
+          )
         ),
       ),
     );

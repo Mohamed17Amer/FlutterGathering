@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 
 part 'profile_state.dart';
 

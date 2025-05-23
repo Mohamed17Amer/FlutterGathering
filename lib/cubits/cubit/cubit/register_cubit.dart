@@ -7,16 +7,11 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
 
-  String? verificationId;
-
-  TextEditingController verificationCodeController = TextEditingController();
 
   ExpansionTileController setPasswordExpansionController =
       ExpansionTileController();
 
-  TextEditingController passwordController = TextEditingController();
 
-  TextEditingController confirmPasswordController = TextEditingController();
   FirebaseServices firebaseServices = FirebaseServices();
 
   Future<void> sendOTP(String phone, {required BuildContext context}) async {
@@ -26,7 +21,26 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<void> verifyCode(String otp, {required BuildContext context}) async {
-    await firebaseServices.verifyCode(otp, context: context);
+    firebaseServices
+        .verifyCode(otp, context: context)
+        .then((result) {
+          emit(VerifyOTPSuccssed());
+        })
+        .catchError((error) {
+          emit(VerifyOTPFailed());
+        });
+  }
+
+  Future<void> verifyCodeWithFirebase(
+    String otp, {
+    required BuildContext context,
+  }) async {
+    firebaseServices
+        .verifyCode(otp, context: context)
+        .then((result) {
+          emit(VerifyOTPSuccssed());
+        })
+        .catchError((error) {});
     emit(VerifyOTPFailed());
   }
 }

@@ -54,9 +54,8 @@ class MyTxtFormField extends StatelessWidget {
           enabled: isEnabled,
           maxLength: maxLength ?? 9,
           maxLines: 1,
-          
+
           decoration: InputDecoration(
-            
             labelText: label,
             hintText: hint,
             alignLabelWithHint: true,
@@ -64,6 +63,16 @@ class MyTxtFormField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(7),
               borderSide: BorderSide(color: Colors.black),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.red.shade900,
+              ), // Your error color
+            ),
+            errorStyle: TextStyle(
+              color:
+                  Colors.red.shade900, // Set your desired error message color
+              fontSize: 14,
             ),
           ),
           onChanged: onChanged,

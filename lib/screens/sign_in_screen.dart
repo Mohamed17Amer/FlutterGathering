@@ -1,14 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/custom_elevated_button.dart' show MyElevatedButton;
 import '../widgets/custom_txt.dart' show MyText;
 import '../widgets/custom_txt_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+  SignInScreen({super.key, this.familyGroupMap});
   static final id = "/sign_in_screen";
+  LoginCubit loginCubit = LoginCubit();
+  QueryDocumentSnapshot<Map<String, dynamic>>? familyGroupMap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +42,29 @@ class SignInScreen extends StatelessWidget {
               ),
               children: [
                 MyTxtFormField(
+                  controller: loginCubit.familyCodeController,
+                  maxLength: 6,
                   label: "😍😘💕 كود العيلة أو التجمع ",
                   hint: "لو مش معاك ،اطلبه من أي حد في الجروب",
-        
+
                   alignLabelWithHint: true,
                   onChanged: (val) {},
                   onSaved: (val) {},
-                ),
-                MyElevatedButton(
-                  onPressed: () {
-                    navigateTo(context, StartingScreen.id);
+                  onValidate: (val) {
+                    return loginCubit.validateFamilyCode(
+                      familyGroupMap?['code'],loginCubit
+                    );
                   },
-                  child: MyText(text: "دخول العيلة"),
+                ),
+                BlocBuilder<LoginCubit, LoginState>(
+                  builder: (context, state) {
+                    return MyElevatedButton(
+                      onPressed:(LoginCubit.isFamilyCodeValid)?  () {
+                        navigateTo(context, StartingScreen.id);
+                      }: null,
+                      child: MyText(text: "دخول العيلة"),
+                    );
+                  },
                 ),
               ],
             ),

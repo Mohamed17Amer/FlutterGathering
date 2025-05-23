@@ -1,17 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
-import 'package:family_gathering_v_0/views/group_view_item.dart';
-import 'package:family_gathering_v_0/views/groups_view_list_view.dart';
 import 'package:family_gathering_v_0/widgets/custom_elevated_button.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:toastification/toastification.dart';
 
 class CreateGroupScreen extends StatefulWidget {
   static String id = "/create_group_screen";
@@ -73,14 +68,10 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                   isCodeGenerated = true;
                                   createGroupCubit.addNewFamilyGroup(
                                     familyNamecontroller.text,
+                                    familyCode!,
                                   );
                                   FirebaseServices().getFamilyGroups();
-                                  familyGroups.add(
-                                    GroupViewItem(
-                                      familyName: familyNamecontroller.text,
-                                      color: generateRandomColor(),
-                                    ),
-                                  );
+                                  
                                   showToastification(
                                     context: context,
                                     message: 'تم إنشاء رمز العيلة بنجاح',

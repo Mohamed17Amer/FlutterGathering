@@ -1,30 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
+import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseServices {
-  final CollectionReference familyGroupsCollections = FirebaseFirestore.instance
+  CollectionReference familyGroupsCollection = FirebaseFirestore.instance
       .collection('familyGroups');
+  late QuerySnapshot<Map<String, dynamic>> familyGroupsSnapshots;
+  static List<QueryDocumentSnapshot<Map<String, dynamic>>> familyGroupsList =
+      [];
 
-  late final QuerySnapshot<Map<String, dynamic>> familyGroupsSnapshots;
- static List<QueryDocumentSnapshot> familyGroupsList = [];
+  String? verificationId;
 
-  Future<void> addNewFamilyGroup(String familyName) {
-    return familyGroupsCollections
-        .add({
-          'name': familyName, // John Doe
-        })
-        .then((value) => debugPrint("group Added"))
-        .catchError((error) => debugPrint("Failed to add new gruop: $error"));
+  Future<void> addNewFamilyGroup(String familyName, String familyCode) {
+    return familyGroupsCollection
+        .add({'name': familyName, 'code': familyCode})
+        .then((value) => debugPrint("Group Added"))
+        .catchError((error) => debugPrint("Failed to add new group: $error"));
   }
 
-  getFamilyGroups() async {
+  Future<void> getFamilyGroups() async {
     familyGroupsList.clear();
     familyGroupsSnapshots =
         await FirebaseFirestore.instance.collection('familyGroups').get();
-
     familyGroupsList.addAll(familyGroupsSnapshots.docs);
   }
 
@@ -44,15 +43,15 @@ class FirebaseServices {
         showMessage('Verification failed: ${e.message}', context);
       },
       codeSent: (String verificationId, int? resendToken) {
-        RegisterCubit().verificationId = verificationId;
+        this.verificationId =
+            verificationId; // Use the same registerCubit instance
         debugPrint(
-          'verificationId $verificationId'
-          'resendToken $resendToken',
+          'verificationId: $verificationId, resendToken: $resendToken',
         );
         showMessage('OTP sent. Please check your phone.', context);
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        RegisterCubit().verificationId = verificationId;
+        this.verificationId = verificationId; // consistent use
       },
     );
   }
@@ -60,12 +59,14 @@ class FirebaseServices {
   Future<void> verifyCode(String otp, {required BuildContext context}) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: RegisterCubit().verificationId!,
+        verificationId: verificationId!,
         smsCode: otp,
       );
       await FirebaseAuth.instance.signInWithCredential(credential);
       showMessage('Phone number verified and user signed in.', context);
-      //  navigateTo(context, SelectGroupScreen.id);
+      navigateTo(context, SelectGroupScreen.id);
+      // Uncomment or add navigation if needed
+      // navigateTo(context, YourNextScreen.id);
     } catch (e) {
       showMessage('Error verifying code: $e', context);
     }

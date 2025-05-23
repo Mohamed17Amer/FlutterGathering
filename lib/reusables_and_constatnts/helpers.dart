@@ -24,7 +24,8 @@ Map<String, Widget Function(BuildContext)> KRoutesMap = {
 
 // Function to navigate to a new screen
 // Takes a BuildContext and a Widget as parameters
-void navigateTo(BuildContext context, String screenId) {
+void navigateTo(BuildContext context, String screenId, ) {
+  
   Navigator.push(context, MaterialPageRoute(builder: KRoutesMap[screenId]!));
 }
 

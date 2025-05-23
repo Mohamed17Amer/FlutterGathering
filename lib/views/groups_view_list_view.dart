@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
@@ -7,23 +6,22 @@ import 'package:family_gathering_v_0/views/group_view_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-List familyGroups=[];
 
 class GroupsView extends StatefulWidget {
-  GroupsView({super.key});
+  const GroupsView({super.key});
 
   @override
   State<GroupsView> createState() => _GroupsViewState();
 }
 
 class _GroupsViewState extends State<GroupsView> {
-  CreateGroupCubit createGroupCubit = CreateGroupCubit();
+  
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreateGroupCubit, CreateGroupState>(
       builder: (context, state) {
-        return GridView.builder(
+        return   GridView.builder(
           itemBuilder: (context, index) {
             if (FirebaseServices.familyGroupsList.isEmpty) {
               return AddGroupItem();
@@ -32,8 +30,8 @@ class _GroupsViewState extends State<GroupsView> {
                 return AddGroupItem();
               } else {
                 return GroupViewItem(
-                  familyName:
-                      FirebaseServices.familyGroupsList[index-1]['name'],
+                  familyGroupMap:
+                      FirebaseServices.familyGroupsList[index-1],
                   color: generateRandomColor(),
                 );
               }

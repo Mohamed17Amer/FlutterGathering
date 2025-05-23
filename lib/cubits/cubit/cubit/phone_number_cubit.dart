@@ -9,6 +9,8 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
   static String phoneNumber = "";
   static String countryCode = "+20";
   TextEditingController phonenNumberContoller = TextEditingController();
+    TextEditingController verificationCodeController = TextEditingController();
+
     ExpansionTileController otpExpansionController = ExpansionTileController();
     RegisterCubit registerCubit = RegisterCubit();
 
@@ -30,7 +32,7 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
     emit(PhoneNumberInitial());
   }
 
-  validateTyping(String phone) {
+  validateTypingPhone(String phone) {
     phoneNumber = phone;
     setIsPhoneValid(false);
     emit(PhoneNumberIsTyping());
@@ -56,7 +58,7 @@ class PhoneNumberCubit extends Cubit<PhoneNumberState> {
   }
 
   openValidationExpansionTile(String phone) {
-    if(phone.length==10) {
+    if(phone.length==10 && phone[0] == "1") {
       otpExpansionController.expand();
 
       

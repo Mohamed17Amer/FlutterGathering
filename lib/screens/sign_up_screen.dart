@@ -47,7 +47,7 @@ class SignUpScreen extends StatelessWidget {
                         keyboardType: TextInputType.phone,
                         maxLength: 10,
                         onValidate: (val) {
-                          return phoneNumberCubit.validateTyping(
+                          return phoneNumberCubit.validateTypingPhone(
                             phoneNumberCubit.phonenNumberContoller.text,
                           );
                         },
@@ -95,16 +95,17 @@ class SignUpScreen extends StatelessWidget {
 
           children: [
             MyTxtFormField(
-              controller: registerCubit.verificationCodeController,
+              controller: phoneNumberCubit.verificationCodeController,
               keyboardType: TextInputType.phone,
               maxLength: 6,
+
             ),
 
             BlocBuilder<RegisterCubit, RegisterState>(
               builder: (context, state) {
                 return MyTxtButton(
-                  onPressed: () {
-                    registerCubit.verifyCode("123456", context: context);
+                  onPressed: (phoneNumberCubit.verificationCodeController.text.length> 6)?null: () {
+                    registerCubit.verifyCode(phoneNumberCubit.verificationCodeController.text, context: context);
                   },
                   text: "تأكيد كود التحقق",
                 );

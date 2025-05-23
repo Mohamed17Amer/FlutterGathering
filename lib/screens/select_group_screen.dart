@@ -1,9 +1,7 @@
-import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/sign_up_screen.dart';
 import 'package:family_gathering_v_0/views/groups_view_list_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_txt.dart';

@@ -3,15 +3,35 @@ import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseServices {
   CollectionReference familyGroupsCollection = FirebaseFirestore.instance
       .collection('familyGroups');
+
+  CollectionReference usersCollection = FirebaseFirestore.instance.collection(
+    'users',
+  );
+
   late QuerySnapshot<Map<String, dynamic>> familyGroupsSnapshots;
   static List<QueryDocumentSnapshot<Map<String, dynamic>>> familyGroupsList =
       [];
-
+  late QuerySnapshot<Map<String, dynamic>> usersSnapshots;
+  static List<QueryDocumentSnapshot<Map<String, dynamic>>> usersList = [];
   String? verificationId;
+
+  Future<void> addNewDocInCollection(
+    CollectionReference collection,
+    Map<String, dynamic> data,
+  ) {
+    return collection
+        .add({
+          data.keys.toList()[0]: data.entries.toList()[0],
+          data.keys.toList()[1]: data.entries.toList()[1],
+        })
+        .then((value) => debugPrint(" Added"))
+        .catchError((error) => debugPrint("Failed to add new : $error"));
+  }
 
   Future<void> addNewFamilyGroup(String familyName, String familyCode) {
     return familyGroupsCollection
@@ -19,12 +39,56 @@ class FirebaseServices {
         .then((value) => debugPrint("Group Added"))
         .catchError((error) => debugPrint("Failed to add new group: $error"));
   }
+  /*
+  Future<void> addNewUser(String userPhone) {
+    return usersCollection
+        .add({'phone': userPhone})
+        .then((value) => debugPrint("User Added"))
+        .catchError((error) => debugPrint("Failed to add new user: $error"));
+  }
+  */
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> addNewUser(String userPhone) async {
+    final DocumentReference counterRef = _firestore
+        .collection('counters')
+        .doc('userID');
+
+    // Run a transaction to atomically increment the counter
+    int? newUserId;
+    await _firestore.runTransaction((transaction) async {
+      final snapshot = await transaction.get(counterRef);
+      if (!snapshot.exists) {
+        // Initialize counter if it does not exist
+        transaction.set(counterRef, {'count': 1});
+        newUserId = 1;
+      } else {
+        final currentCount = snapshot['count'] as int;
+        newUserId = currentCount + 1;
+        transaction.update(counterRef, {'count': newUserId});
+      }
+    });
+
+    // Add user with the new id
+    await usersCollection.doc(newUserId.toString()).set({
+      'phone': userPhone,
+      'id': newUserId,
+    });
+    debugPrint("User added with ID: $newUserId");
+  }
 
   Future<void> getFamilyGroups() async {
     familyGroupsList.clear();
     familyGroupsSnapshots =
         await FirebaseFirestore.instance.collection('familyGroups').get();
     familyGroupsList.addAll(familyGroupsSnapshots.docs);
+  }
+
+  Future<void> getUsers() async {
+    usersList.clear();
+    usersSnapshots = await FirebaseFirestore.instance.collection('users').get();
+    usersList.addAll(usersSnapshots.docs);
   }
 
   Future<void> sendOTP(String phone, {required BuildContext context}) async {

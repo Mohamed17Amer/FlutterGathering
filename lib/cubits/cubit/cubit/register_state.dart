@@ -11,3 +11,8 @@ final class SendOTPSucced extends RegisterState {}
 final class SendOTPFailed extends RegisterState {}
 final class VerifyOTPSuccssed extends RegisterState {}
 final class VerifyOTPFailed extends RegisterState {}
+
+final class AddUserSucceed extends RegisterState {}
+final class AddUserFailed extends RegisterState {}
+final class GetUsersSuccess extends RegisterState {}
+final class GetUsersFailed extends RegisterState {}

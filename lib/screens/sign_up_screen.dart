@@ -105,7 +105,7 @@ class SignUpScreen extends StatelessWidget {
               builder: (context, state) {
                 return MyTxtButton(
                   onPressed: (phoneNumberCubit.verificationCodeController.text.length> 6)?null: () {
-                    registerCubit.verifyCode(phoneNumberCubit.verificationCodeController.text, context: context);
+                    registerCubit.verifyCode(phoneNumberCubit.verificationCodeController.text,PhoneNumberCubit.phoneNumber, context: context);
                   },
                   text: "تأكيد كود التحقق",
                 );

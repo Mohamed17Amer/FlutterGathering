@@ -3,7 +3,6 @@ import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseServices {
   CollectionReference familyGroupsCollection = FirebaseFirestore.instance
@@ -19,7 +18,7 @@ class FirebaseServices {
   late QuerySnapshot<Map<String, dynamic>> usersSnapshots;
   static List<QueryDocumentSnapshot<Map<String, dynamic>>> usersList = [];
   String? verificationId;
-
+/*
   Future<void> addNewDocInCollection(
     CollectionReference collection,
     Map<String, dynamic> data,
@@ -32,23 +31,38 @@ class FirebaseServices {
         .then((value) => debugPrint(" Added"))
         .catchError((error) => debugPrint("Failed to add new : $error"));
   }
+*/
 
-  Future<void> addNewFamilyGroup(String familyName, String familyCode) {
-    return familyGroupsCollection
-        .add({'name': familyName, 'code': familyCode})
-        .then((value) => debugPrint("Group Added"))
-        .catchError((error) => debugPrint("Failed to add new group: $error"));
-  }
-  /*
-  Future<void> addNewUser(String userPhone) {
-    return usersCollection
-        .add({'phone': userPhone})
-        .then((value) => debugPrint("User Added"))
-        .catchError((error) => debugPrint("Failed to add new user: $error"));
-  }
-  */
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+Future<void> addNewFamilyGroup(String familyName, String familyCode) async {
+  final counterRef = _firestore.collection('counters').doc('familyGroupId');
+
+  // Atomically increment the counter and get the new value
+  final newId = await _firestore.runTransaction((transaction) async {
+    final snapshot = await transaction.get(counterRef);
+    int currentCount = 0;
+
+    if (snapshot.exists) {
+      currentCount = snapshot.get('count') as int;
+    } else {
+      transaction.set(counterRef, {'count': 0});
+    }
+
+    final newCount = currentCount + 1;
+    transaction.update(counterRef, {'count': newCount});
+    return newCount;
+  });
+
+  // Add new group with the auto-increment id
+  await _firestore.collection('familyGroups').add({
+    'id': newId,
+    'name': familyName,
+    'code': familyCode,
+  }).then((_) => print("Group Added with ID: $newId"))
+    .catchError((error) => print("Failed to add new group: $error"));
+}
+
 
   Future<void> addNewUser(String userPhone) async {
     final DocumentReference counterRef = _firestore

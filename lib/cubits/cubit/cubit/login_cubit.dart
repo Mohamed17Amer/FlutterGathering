@@ -7,15 +7,14 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   TextEditingController familyCodeController = TextEditingController();
-  static bool isFamilyCodeValid = false;
+   late bool isFamilyCodeValid;
 
   setIsFamilyCodeValid(bool isValid, LoginCubit loginCubit) {
-    isFamilyCodeValid = isValid;
+     loginCubit.isFamilyCodeValid = isValid;
     emit(LoginInitial());
   }
 
   validateFamilyCode(String familyCode, LoginCubit loginCubit) {
-    setIsFamilyCodeValid(false, loginCubit);
 
     if (familyCodeController.text != familyCode) {
       setIsFamilyCodeValid(false, loginCubit);
@@ -27,5 +26,14 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSucceed());
       return null;
     }
+  }
+
+  int selectedIndex = 0;
+
+  changeTabeIndex(int index) {
+
+  selectedIndex = index;
+
+    emit(ChangeTabIndex());
   }
 }

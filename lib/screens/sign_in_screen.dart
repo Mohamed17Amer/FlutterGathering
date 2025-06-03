@@ -59,8 +59,8 @@ class SignInScreen extends StatelessWidget {
                 BlocBuilder<LoginCubit, LoginState>(
                   builder: (context, state) {
                     return MyElevatedButton(
-                      onPressed:(LoginCubit.isFamilyCodeValid==false)?  () {
-                        navigateTo(context, StartingScreen.id);
+                      onPressed:(loginCubit.isFamilyCodeValid==false)?  () {
+                        regularNavigatioN(context, StartingScreen(familyGroupMap: familyGroupMap,));
                       }: null,
                       child: MyText(text: "دخول العيلة"),
                     );

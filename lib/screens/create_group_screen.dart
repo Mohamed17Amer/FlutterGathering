@@ -66,7 +66,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                 } else {
                                   familyCode = generateCode(6, existingCodes);
                                   isCodeGenerated = true;
-                                  createGroupCubit.addNewFamilyGroup(
+                                 await createGroupCubit.addNewFamilyGroup(
                                     familyNamecontroller.text,
                                     familyCode!,
                                   );

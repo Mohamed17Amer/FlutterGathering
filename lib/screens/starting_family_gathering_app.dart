@@ -1,5 +1,7 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../reusables_and_constatnts/constants.dart';
 import '../views/bottom_nav_bar_view.dart';
@@ -8,21 +10,14 @@ import 'manage_screen.dart';
 import 'profile_screen.dart';
 import 'settings_screen.dart';
 
-class StartingScreen extends StatefulWidget {
-   static final String id ="/statring_screen" ;
+class StartingScreen extends StatelessWidget {
+  static final String id = "/statring_screen";
+  QueryDocumentSnapshot? familyGroupMap;
+  StartingScreen({super.key, this.familyGroupMap});
 
-  const StartingScreen({super.key});
+  LoginCubit loginCubit = LoginCubit();
 
-  @override
-  State<StartingScreen> createState() =>
-      _StartingScreenState();
-}
-
-class _StartingScreenState
-    extends State<StartingScreen> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _bottomNavigationBarPages =  [
+  final List<Widget> _bottomNavigationBarPages = [
     HomeScreen(),
     ManageScreen(),
     SettingsScreen(),
@@ -30,14 +25,8 @@ class _StartingScreenState
   ];
 
   final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-    BottomNavigationBarItem(
-      icon: const Icon(Icons.home),
-      label: 'Home',
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.business),
-      label: 'Manage',
-    ),
+    BottomNavigationBarItem(icon: const Icon(Icons.home), label: 'Home'),
+    const BottomNavigationBarItem(icon: Icon(Icons.business), label: 'Manage'),
     const BottomNavigationBarItem(
       icon: Icon(Icons.business),
       label: 'Settings',
@@ -48,26 +37,36 @@ class _StartingScreenState
     ),
   ];
 
-  void _onNavigationItemBarTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  // void _onNavigationItemBarTapped(int index) {
+  //  // setState(() {});
+
+  //        loginCubit.selectedIndex = index;
+
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _bottomNavigationBarPages[_selectedIndex],
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: KBackgroundColor,
-        ),
-        child: BottomNavBarView(
-          bottomNavigationBarItems: _bottomNavigationBarItems,
-          selectedIndex: _selectedIndex,
-          onNavigationItemBarTapped: _onNavigationItemBarTapped,
-        ),
-      ),
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: _bottomNavigationBarPages[loginCubit.selectedIndex],
+          bottomNavigationBar: Theme(
+            data: Theme.of(context).copyWith(canvasColor: KBackgroundColor),
+            child: BottomNavBarView(      
+              bottomNavigationBarItems: _bottomNavigationBarItems,
+              selectedIndex: loginCubit.selectedIndex,
+              onNavigationItemBarTapped: (index){
+                print(  "Selected index: $index");
+                loginCubit.changeTabeIndex(
+                index,
+              );
+              }
+              
+              
+            ),
+          ),
+        );
+      },
     );
   }
 }

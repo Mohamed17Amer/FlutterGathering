@@ -17,7 +17,7 @@ Map<String, Widget Function(BuildContext)> KRoutesMap = {
 
   SelectGroupScreen.id: (context) => const SelectGroupScreen(),
   CreateGroupScreen.id: (context) =>  CreateGroupScreen(),
-  StartingScreen.id: (context) => const StartingScreen(),
+  StartingScreen.id: (context) =>  StartingScreen(),
   HomeScreen.id: (context) => const HomeScreen(),
   PhoneAuthScreen.id: (context) => const PhoneAuthScreen(),
 };
@@ -27,6 +27,11 @@ Map<String, Widget Function(BuildContext)> KRoutesMap = {
 void navigateTo(BuildContext context, String screenId, ) {
   
   Navigator.push(context, MaterialPageRoute(builder: KRoutesMap[screenId]!));
+}
+
+void regularNavigatioN(BuildContext context, Widget screen, ) {
+  
+  Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }
 
 Set<String> existingCodes = {}; // Set to store existing codes

@@ -1,3 +1,4 @@
+import 'package:family_gathering_v_0/cubits/app_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/phone_number_cubit.dart';
@@ -35,12 +36,14 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
     return ToastificationWrapper(
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => AppCubit()),
           BlocProvider(create: (context) => RegisterCubit()),
           BlocProvider(create: (context) => LoginCubit()),
           BlocProvider(create: (context) => PhoneNumberCubit()),
           BlocProvider(create: (context) => ProfileCubit(MemberProfileModel())),
-          BlocProvider(create: (context) => CreateGroupCubit()..getFamilyGroups()),
-
+          BlocProvider(
+            create: (context) => CreateGroupCubit()..getFamilyGroups(),
+          ),
         ],
 
         child: MaterialApp(

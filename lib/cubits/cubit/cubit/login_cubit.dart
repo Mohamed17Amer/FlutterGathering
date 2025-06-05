@@ -28,12 +28,5 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  int selectedIndex = 0;
 
-  changeTabeIndex(int index) {
-
-  selectedIndex = index;
-
-    emit(ChangeTabIndex());
-  }
 }

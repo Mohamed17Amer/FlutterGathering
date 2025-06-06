@@ -92,7 +92,7 @@ class FirebaseServices {
       'id': newUserId,
       'groupId': null, // Initially no group
     });
-    print("User added with ID: $newUserId");
+    log("User added with ID: $newUserId");
   }
 
   Future<void> assignUserToGroup() async {

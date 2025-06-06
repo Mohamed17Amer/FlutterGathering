@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
+import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
 import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,10 +11,12 @@ import '../widgets/custom_txt.dart' show MyText;
 import '../widgets/custom_txt_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key, this.familyGroupMap});
+  SignInScreen({super.key, this.familyGroupMap, this.currentUserId});
   static final id = "/sign_in_screen";
+  int? currentUserId;
   LoginCubit loginCubit = LoginCubit();
   QueryDocumentSnapshot<Map<String, dynamic>>? familyGroupMap;
+  FirebaseServices firebaseServices = FirebaseServices();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,11 @@ class SignInScreen extends StatelessWidget {
                 BlocBuilder<LoginCubit, LoginState>(
                   builder: (context, state) {
                     return MyElevatedButton(
-                      onPressed:(loginCubit.isFamilyCodeValid==false)?  () {
+                      onPressed:(loginCubit.isFamilyCodeValid==false)?  () async{
+                        await firebaseServices.assignUserToGroup(
+                      
+                        );
+                        
                         regularNavigatioN(context, StartingScreen(familyGroupMap: familyGroupMap,));
                       }: null,
                       child: MyText(text: "دخول العيلة"),

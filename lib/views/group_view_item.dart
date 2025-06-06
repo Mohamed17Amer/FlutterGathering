@@ -4,16 +4,17 @@ import 'package:family_gathering_v_0/widgets/custom_txt.dart';
 import 'package:flutter/material.dart';
 
 class GroupViewItem extends StatelessWidget {
-  GroupViewItem({super.key, this.color, this.familyGroupMap});
+  GroupViewItem({super.key, this.color, this.familyGroupMap, this.currentUserId});
   Color? color = Colors.purple;
   QueryDocumentSnapshot<Map<String, dynamic>>? familyGroupMap;
+  int? currentUserId;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SignInScreen(familyGroupMap: familyGroupMap!)),
+          MaterialPageRoute(builder: (context) => SignInScreen(familyGroupMap: familyGroupMap!,)),
         );
       },
       child: Card(

@@ -6,21 +6,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../reusables_and_constatnts/constants.dart';
 import '../views/bottom_nav_bar_view.dart';
 
-class StartingScreen extends StatelessWidget {
+class StartingScreen extends StatefulWidget {
   static final String id = "/statring_screen";
   QueryDocumentSnapshot? familyGroupMap;
   StartingScreen({super.key, this.familyGroupMap});
 
+  @override
+  State<StartingScreen> createState() => _StartingScreenState();
+}
+
+class _StartingScreenState extends State<StartingScreen> {
   AppCubit appCubit = AppCubit();
 
-
   // void _onNavigationItemBarTapped(int index) {
-  //  // setState(() {});
-
-  //        AppCubit.selectedIndex = index;
-
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(
@@ -29,17 +27,16 @@ class StartingScreen extends StatelessWidget {
           body: appCubit.bottomNavigationBarPages[appCubit.selectedIndex],
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(canvasColor: KBackgroundColor),
-            child: BottomNavBarView(      
-              bottomNavigationBarItems:appCubit.bottomNavigationBarItems,
+            child: BottomNavBarView(
+              bottomNavigationBarItems: appCubit.bottomNavigationBarItems,
               selectedIndex: appCubit.selectedIndex,
-              onNavigationItemBarTapped: (index){
-                print(  "Selected index: $index");
-                appCubit.changeTabeIndex(
-                index,
-              );
-              }
-              
-              
+              onNavigationItemBarTapped: (index) {
+                print("Selected index: $index");
+
+                setState(() {
+                appCubit.changeTabeIndex(index);
+                });
+              },
             ),
           ),
         );

@@ -8,8 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class GroupsView extends StatefulWidget {
-  const GroupsView({super.key});
+   GroupsView({super.key, this.currentUserId});
 
+int? currentUserId;
   @override
   State<GroupsView> createState() => _GroupsViewState();
 }
@@ -32,6 +33,7 @@ class _GroupsViewState extends State<GroupsView> {
                 return GroupViewItem(
                   familyGroupMap:
                       FirebaseServices.familyGroupsList[index-1],
+                       currentUserId: widget.currentUserId,
                   color: generateRandomColor(),
                 );
               }

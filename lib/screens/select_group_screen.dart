@@ -8,7 +8,8 @@ import '../widgets/custom_txt.dart';
 
 class SelectGroupScreen extends StatelessWidget {
   static final id = "/select_group_screen";
-  const SelectGroupScreen({super.key});
+  int? currentUserId;
+   SelectGroupScreen({super.key, this.currentUserId});
 
   @override
   Widget build(BuildContext context) {

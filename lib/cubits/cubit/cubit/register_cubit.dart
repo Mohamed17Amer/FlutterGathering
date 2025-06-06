@@ -20,12 +20,9 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   Future<void> verifyCode(String otp, String phone,{required BuildContext context}) async {
     firebaseServices
-        .verifyCode(otp, context: context)
+        .verifyCode(otp, phone, context: context)
         .then((result) {
-          Future.delayed(const Duration(seconds: 2), () {
-
-          });
-           addNewUser(phone);
+       
 
           emit(VerifyOTPSuccssed());
         })
@@ -35,11 +32,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<void> verifyCodeWithFirebase(
-    String otp, {
+    String otp, phone,{
     required BuildContext context,
   }) async {
     firebaseServices
-        .verifyCode(otp, context: context)
+        .verifyCode(otp,phone, context: context)
         .then((result) {
           emit(VerifyOTPSuccssed());
         })

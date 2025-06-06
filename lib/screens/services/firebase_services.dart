@@ -71,7 +71,7 @@ Future<void> addNewFamilyGroup(String familyName, String familyCode) async {
 
     // Run a transaction to atomically increment the counter
     int? newUserId;
-    await _firestore.runTransaction((transaction) async {
+     _firestore.runTransaction((transaction) async {
       final snapshot = await transaction.get(counterRef);
       if (!snapshot.exists) {
         // Initialize counter if it does not exist

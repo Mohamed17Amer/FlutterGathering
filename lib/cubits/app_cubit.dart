@@ -3,7 +3,6 @@ import 'package:family_gathering_v_0/screens/home_screen.dart';
 import 'package:family_gathering_v_0/screens/manage_screen.dart';
 import 'package:family_gathering_v_0/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import '../screens/settings_screen.dart';
 

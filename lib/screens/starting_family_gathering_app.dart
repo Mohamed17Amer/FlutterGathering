@@ -1,15 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/app_cubit.dart';
-import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../reusables_and_constatnts/constants.dart';
 import '../views/bottom_nav_bar_view.dart';
-import 'home_screen.dart';
-import 'manage_screen.dart';
-import 'profile_screen.dart';
-import 'settings_screen.dart';
 
 class StartingScreen extends StatelessWidget {
   static final String id = "/statring_screen";

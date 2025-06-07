@@ -1,6 +1,6 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
-import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
+import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:family_gathering_v_0/views/add_group_item.dart';
 import 'package:family_gathering_v_0/views/group_view_item.dart';
 import 'package:flutter/material.dart';

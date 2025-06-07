@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
+import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 
 part 'register_state.dart';

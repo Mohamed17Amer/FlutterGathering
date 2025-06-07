@@ -1,7 +1,7 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
-import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
+import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:family_gathering_v_0/widgets/custom_elevated_button.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt_field.dart';

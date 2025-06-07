@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
-import 'package:family_gathering_v_0/screens/services/firebase_services.dart';
+import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

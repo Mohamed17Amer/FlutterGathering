@@ -14,6 +14,8 @@ class FirebaseServices {
     'users',
   );
 
+  CollectionReference countersCollection = FirebaseFirestore.instance
+      .collection('counters');
   late QuerySnapshot<Map<String, dynamic>> familyGroupsSnapshots;
   static List<QueryDocumentSnapshot<Map<String, dynamic>>> familyGroupsList =
       [];
@@ -22,25 +24,14 @@ class FirebaseServices {
   String? verificationId;
   static int? currentUserId;
   static int? currentGroupId;
-  /*
-  Future<void> addNewDocInCollection(
-    CollectionReference collection,
-    Map<String, dynamic> data,
-  ) {
-    return collection
-        .add({
-          data.keys.toList()[0]: data.entries.toList()[0],
-          data.keys.toList()[1]: data.entries.toList()[1],
-        })
-        .then((value) => debugPrint(" Added"))
-        .catchError((error) => debugPrint("Failed to add new : $error"));
-  }
-*/
+
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> addNewFamilyGroup(String familyName, String familyCode) async {
-    final counterRef = _firestore.collection('counters').doc('familyGroupId');
+    final DocumentReference counterRef = countersCollection.doc(
+      'familyGroupId',
+    );
 
     // Atomically increment the counter and get the new value
     final newId = await _firestore.runTransaction((transaction) async {
@@ -60,17 +51,14 @@ class FirebaseServices {
     });
 
     // Add new group with the auto-increment id
-    await _firestore
-        .collection('familyGroups')
+    await familyGroupsCollection
         .add({'id': newId, 'name': familyName, 'code': familyCode})
-        .then((_) => print("Group Added with ID: $newId"))
-        .catchError((error) => print("Failed to add new group: $error"));
+        .then((_) => log("Group Added with ID: $newId"))
+        .catchError((error) => log("Failed to add new group: $error"));
   }
 
   Future<void> addNewUser(String userPhone) async {
-    final DocumentReference counterRef = _firestore
-        .collection('counters')
-        .doc('userID');
+    final DocumentReference counterRef = countersCollection.doc('userID');
 
     int? newUserId;
     await _firestore.runTransaction((transaction) async {
@@ -87,7 +75,7 @@ class FirebaseServices {
       }
     });
 
-    await _firestore.collection('users').doc(newUserId.toString()).set({
+    await usersCollection.doc(newUserId.toString()).set({
       'phone': userPhone,
       'id': newUserId,
       'groupId': null, // Initially no group
@@ -96,8 +84,8 @@ class FirebaseServices {
   }
 
   Future<void> assignUserToGroup() async {
-    await _firestore.collection('users').doc(currentUserId.toString()).update({
-      'groupId': currentGroupId,
+    await usersCollection.doc(currentUserId.toString()).update({
+      'groupId': FieldValue.arrayUnion([currentGroupId]),
     });
     log("User $currentUserId assigned to group $currentGroupId");
   }
@@ -133,7 +121,7 @@ class FirebaseServices {
       codeSent: (String verificationId, int? resendToken) {
         this.verificationId =
             verificationId; // Use the same registerCubit instance
-        debugPrint(
+        log(
           'verificationId: $verificationId, resendToken: $resendToken',
         );
         showMessage('OTP sent. Please check your phone.', context);
@@ -160,8 +148,8 @@ class FirebaseServices {
 
       await addNewUser(phone);
 
-//final userId = await FirebaseFirestore.instance.collection('users').get()..docs.last["userId"];
-//print("$userId ffffffffff");
+      //final userId = await FirebaseFirestore.instance.collection('users').get()..docs.last["userId"];
+      //log("$userId ffffffffff");
       navigateTo(context, SelectGroupScreen.id);
       // Uncomment or add navigation if needed
       // navigateTo(context, YourNextScreen.id);

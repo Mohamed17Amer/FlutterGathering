@@ -1,4 +1,3 @@
-
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
@@ -46,9 +45,9 @@ class ProfileScreen extends StatelessWidget {
                             backgroundColor: Colors.white,
                             child: CircleAvatar(
                               radius: 50,
-                              backgroundImage:
-                               AssetImage(
-                                "assets/images/sms.png",
+                              backgroundImage: AssetImage(
+                                profileCubit.member!.img ??
+                                    "assets/images/sms.png",
                               ),
                             ),
                           ),
@@ -62,11 +61,14 @@ class ProfileScreen extends StatelessWidget {
                     label: profileCubit.member!.name ?? "اسمك",
                     keyboardType: TextInputType.name,
                     maxLength: 30,
+                    onSaved: profileCubit.setMemberName(
+                      profileCubit.nameController.text,
+                    ),
                   ),
                   SizedBox(height: 10),
                   MyTxtFormField(
                     controller: profileCubit.phoneNumberController,
-                    label: profileCubit.member!.phone?? "رقم التليفون",
+                    label: profileCubit.member!.phone ?? "رقم التليفون",
                     keyboardType: TextInputType.phone,
                     maxLength: 12,
                   ),
@@ -81,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                         // Use Expanded here inside Row to fill remaining space
                         child: MyTxtFormField(
                           controller: profileCubit.fromAddressController,
-                       //   label: profileCubit.member!.fromAddress?.detaledAddress?? "محل الميلاد",
+                          //   label: profileCubit.member!.fromAddress?.detaledAddress?? "محل الميلاد",
                           keyboardType: TextInputType.text,
                           maxLength: 30,
                         ),
@@ -99,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                         // Use Expanded here too
                         child: MyTxtFormField(
                           controller: profileCubit.livingAddressController,
-                         // label:profileCubit.member!.livingAddress?.detaledAddress?? "محل الإقامة",
+                          // label:profileCubit.member!.livingAddress?.detaledAddress?? "محل الإقامة",
                           keyboardType: TextInputType.text,
                           maxLength: 30,
                         ),
@@ -135,6 +137,17 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
+        ),
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            profileCubit.assignProfileData();
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.save),
+          elevation: 20,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          focusColor: Colors.blue,
         ),
       ),
     );

@@ -35,9 +35,8 @@ class MyTxtFormField extends StatelessWidget {
   final TextEditingController? controller;
   final InputDecoration? decoration;
   final Function(String)? onChanged;
-  final Function(String)? onSaved;
+  final Function(String?)? onSaved;
   final String? Function(String?)? onValidate;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -78,6 +77,7 @@ class MyTxtFormField extends StatelessWidget {
           onChanged: onChanged,
           validator: onValidate,
           autovalidateMode: AutovalidateMode.always,
+          onSaved: onSaved,
         ),
       ),
     );

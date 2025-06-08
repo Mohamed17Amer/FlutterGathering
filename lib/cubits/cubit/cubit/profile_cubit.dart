@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
+import 'package:family_gathering_v_0/services/firebase_services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -15,6 +17,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController fromAddressController = TextEditingController();
   TextEditingController livingAddressController = TextEditingController();
+
+    FirebaseServices firebaseServices = FirebaseServices();
+
+Map profileDataMap = {};
 
   Future<void> pickImage() async {
     emit(ProfilePictureLoading());
@@ -51,6 +57,24 @@ class ProfileCubit extends Cubit<ProfileState> {
  
   setMemberConnectionMap(Map<String?, String?> map) {
     member?.memberConnectionMap = map;
+  }
+
+  updateProfileDataMap() {
+    profileDataMap = {
+      "name": member?.name,
+    //  "phone": member?.phone,
+      "fromAddress": member?.fromAddress,
+      "livingAddress": member?.livingAddress,
+      "img": member?.img,
+      "memberConnectionMap": member?.memberConnectionMap,
+    };
+    
+    return profileDataMap;
+  }
+  
+  Future<void> assignProfileData() async {
+    final dataMap = updateProfileDataMap();
+    firebaseServices.assignProfileData(profileDataMap: dataMap);
   }
  
 }

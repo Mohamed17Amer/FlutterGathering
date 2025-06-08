@@ -25,7 +25,6 @@ class FirebaseServices {
   static int? currentUserId;
   static int? currentGroupId;
 
-
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> addNewFamilyGroup(String familyName, String familyCode) async {
@@ -90,6 +89,34 @@ class FirebaseServices {
     log("User $currentUserId assigned to group $currentGroupId");
   }
 
+  Future<void> assignProfileData({Map? profileDataMap}) async {
+    final DocumentReference currentRef = countersCollection.doc(
+      currentUserId.toString(),
+    );
+    await _firestore.runTransaction((transaction) async {
+      final snapshot = await transaction.get(currentRef);
+      if (!snapshot.exists) {
+        transaction.set(currentRef, {
+          'phone': profileDataMap?['phone'],
+          'name': profileDataMap?['name'],
+          'fromAddress': profileDataMap?['fromAddress'],
+          'livingAddress': profileDataMap?['livingAddress'],
+          'img': profileDataMap?['img'],
+          'memberConnectionMap': profileDataMap?['memberConnectionMap'],
+        });
+      } else {
+        transaction.update(currentRef, {
+          'phone': profileDataMap?['phone'],
+          'name': profileDataMap?['name'],
+          'fromAddress': profileDataMap?['fromAddress'],
+          'livingAddress': profileDataMap?['livingAddress'],
+          'img': profileDataMap?['img'],
+          'memberConnectionMap': profileDataMap?['memberConnectionMap'],
+        });
+      }
+    });
+  }
+
   Future<void> getFamilyGroups() async {
     familyGroupsList.clear();
     familyGroupsSnapshots =
@@ -121,9 +148,7 @@ class FirebaseServices {
       codeSent: (String verificationId, int? resendToken) {
         this.verificationId =
             verificationId; // Use the same registerCubit instance
-        log(
-          'verificationId: $verificationId, resendToken: $resendToken',
-        );
+        log('verificationId: $verificationId, resendToken: $resendToken');
         showMessage('OTP sent. Please check your phone.', context);
       },
       codeAutoRetrievalTimeout: (String verificationId) {

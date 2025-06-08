@@ -1,8 +1,10 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
+import 'package:family_gathering_v_0/views/connection_ways_drop_down_view.dart';
 import 'package:family_gathering_v_0/views/drop_down_txt_field_item.dart';
 import 'package:family_gathering_v_0/widgets/custom_elevated_button.dart';
+import 'package:family_gathering_v_0/widgets/custom_svg_img.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt_field.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +12,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatelessWidget {
   static String id = "/profile_screen";
-  ProfileCubit profileCubit = ProfileCubit(MemberProfileModel());
-
-  List<DropDownTextFieldItemModelModel> connectionWaysValuesList = [
-    DropDownTextFieldItemModelModel(),
-  ];
 
   ProfileScreen({super.key});
+
+  ProfileCubit profileCubit = ProfileCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +39,8 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () {
                             profileCubit.pickImage();
                           },
-                          child: CircleAvatar(
-                            radius: 55,
-                            backgroundColor: Colors.white,
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                profileCubit.member!.img ??
-                                    "assets/images/sms.png",
-                              ),
-                            ),
-                          ),
+                          child: MySvg(svgImgPath: "assets/images/sms.svg")
+                      
                         );
                       },
                     ),
@@ -58,20 +48,17 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: 20),
                   MyTxtFormField(
                     controller: profileCubit.nameController,
-                    label: profileCubit.member!.name ?? "اسمك",
+                    label:"اسمك",
                     keyboardType: TextInputType.name,
                     maxLength: 30,
-                    onEditingComplete: profileCubit.setMemberName(
-                      profileCubit.nameController.text,
-                    ),
+                                       
                   ),
                   SizedBox(height: 10),
                   MyTxtFormField(
                     controller: profileCubit.phoneNumberController,
-                    label: profileCubit.member!.phone ?? "رقم التليفون",
+                    label: "رقم التليفون",
                     keyboardType: TextInputType.phone,
                     maxLength: 12,
-                    onEditingComplete: profileCubit.setMemberPhone(),
                   ),
                   SizedBox(height: 10),
 
@@ -99,7 +86,6 @@ class ProfileScreen extends StatelessWidget {
                       MyText(text: "محل الإقامة"),
                       SizedBox(width: 10),
                       Expanded(
-                        // Use Expanded here too
                         child: MyTxtFormField(
                           controller: profileCubit.livingAddressController,
                           // label:profileCubit.member!.livingAddress?.detaledAddress?? "محل الإقامة",
@@ -114,26 +100,13 @@ class ProfileScreen extends StatelessWidget {
                     child: MyText(text: "إضافة طرق الاتصال الأخرى"),
 
                     onPressed: () {
-                      connectionWaysValuesList.add(
-                        DropDownTextFieldItemModelModel(),
+                      profileCubit.connectionWaysValuesList.add(
+                       DropDownTextFieldItemModelModel(),
                       );
+                      
                     },
                   ),
-                  SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                      itemCount:
-                          connectionWaysValuesList.isEmpty
-                              ? 1
-                              : connectionWaysValuesList.length,
-                      itemBuilder: (context, index) {
-                        return DropdownTextFieldsItem(
-                          index: index,
-                          items: connectionWaysValuesList,
-                        );
-                      },
-                    ),
-                  ),
+ItemListScreen(),
                 ],
               ),
             ),
@@ -151,5 +124,91 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+
+/****************************** */
+
+class Item {
+  String? category;
+  String? text;
+  Item({this.category, this.text});
+}
+
+class ItemListScreen extends StatefulWidget {
+  @override
+  ItemListScreenState createState() => ItemListScreenState();
+}
+
+class ItemListScreenState extends State<ItemListScreen> {
+  List<Item> items = [];
+
+  List<String> categories = ['Category 1', 'Category 2', 'Category 3'];
+
+  void addItem() {
+    setState(() {
+      items.add(Item());
+    });
+  }
+
+  void removeItem(int index) {
+    setState(() {
+      items.removeAt(index);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (_, index) {
+          final item = items[index];
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                // Add button
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: addItem,
+                ),
+                // Remove button
+                IconButton(
+                  icon: Icon(Icons.remove),
+                  onPressed: () => removeItem(index),
+                ),
+                // Dropdown for category
+                DropdownButton<String>(
+                  value: item.category,
+                  hint: Text('Select category'),
+                  items: categories
+                      .map((cat) => DropdownMenuItem(
+                            child: Text(cat),
+                            value: cat,
+                          ))
+                      .toList(),
+                  onChanged: (val) {
+                    setState(() {
+                      item.category = val;
+                    });
+                  },
+                ),
+                // TextField for input string
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(hintText: 'Enter text'),
+                    onChanged: (val) {
+                      item.text = val;
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    
   }
 }

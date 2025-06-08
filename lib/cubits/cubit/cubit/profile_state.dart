@@ -7,3 +7,6 @@ final class ProfileInitial extends ProfileState {}
 
 final class ProfilePictureLoading extends ProfileState {}
 final class ProfilePictureUpdated extends ProfileState {}
+final class TestState extends ProfileState {
+  
+}

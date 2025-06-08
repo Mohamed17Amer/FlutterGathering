@@ -1,4 +1,5 @@
 import 'package:family_gathering_v_0/screens/create_group_screen.dart';
+import 'package:family_gathering_v_0/screens/profile_screen.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:family_gathering_v_0/screens/sign_in_screen.dart';
 import 'package:family_gathering_v_0/screens/sign_up_screen.dart';
@@ -20,6 +21,7 @@ Map<String, Widget Function(BuildContext)> KRoutesMap = {
   StartingScreen.id: (context) =>  StartingScreen(),
   HomeScreen.id: (context) => const HomeScreen(),
   PhoneAuthScreen.id: (context) => const PhoneAuthScreen(),
+  ProfileScreen.id: (context) => ProfileScreen(),
 };
 
 // Function to navigate to a new screen

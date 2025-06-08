@@ -61,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                     label: profileCubit.member!.name ?? "اسمك",
                     keyboardType: TextInputType.name,
                     maxLength: 30,
-                    onSaved: profileCubit.setMemberName(
+                    onEditingComplete: profileCubit.setMemberName(
                       profileCubit.nameController.text,
                     ),
                   ),
@@ -71,6 +71,7 @@ class ProfileScreen extends StatelessWidget {
                     label: profileCubit.member!.phone ?? "رقم التليفون",
                     keyboardType: TextInputType.phone,
                     maxLength: 12,
+                    onEditingComplete: profileCubit.setMemberPhone(),
                   ),
                   SizedBox(height: 10),
 
@@ -142,12 +143,11 @@ class ProfileScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             profileCubit.assignProfileData();
-            Navigator.pop(context);
           },
-          child: Icon(Icons.save),
           elevation: 20,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           focusColor: Colors.blue,
+          child: Icon(Icons.save),
         ),
       ),
     );

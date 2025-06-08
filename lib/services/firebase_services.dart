@@ -89,34 +89,40 @@ class FirebaseServices {
     log("User $currentUserId assigned to group $currentGroupId");
   }
 
-  Future<void> assignProfileData({Map? profileDataMap}) async {
-    final DocumentReference currentRef = countersCollection.doc(
-      currentUserId.toString(),
-    );
+Future<void> assignProfileData({Map? profileDataMap}) async {
+  if (profileDataMap == null) {
+    log('profileDataMap is null');
+    return;
+  }
+  
+  final DocumentReference currentRef = usersCollection.doc(currentUserId.toString());
+
+  try {
     await _firestore.runTransaction((transaction) async {
       final snapshot = await transaction.get(currentRef);
+      
+      final dataToSetOrUpdate = {
+        'phone': profileDataMap['phone'],
+        'name': profileDataMap['name'],
+        'fromAddress': profileDataMap['fromAddress'],
+        'livingAddress': profileDataMap['livingAddress'],
+        'img': profileDataMap['img'],
+        'memberConnectionMap': profileDataMap['memberConnectionMap'],
+      };
+
       if (!snapshot.exists) {
-        transaction.set(currentRef, {
-          'phone': profileDataMap?['phone'],
-          'name': profileDataMap?['name'],
-          'fromAddress': profileDataMap?['fromAddress'],
-          'livingAddress': profileDataMap?['livingAddress'],
-          'img': profileDataMap?['img'],
-          'memberConnectionMap': profileDataMap?['memberConnectionMap'],
-        });
+        transaction.set(currentRef, dataToSetOrUpdate);
+        log ('Profile data set for user $currentUserId');
       } else {
-        transaction.update(currentRef, {
-          'phone': profileDataMap?['phone'],
-          'name': profileDataMap?['name'],
-          'fromAddress': profileDataMap?['fromAddress'],
-          'livingAddress': profileDataMap?['livingAddress'],
-          'img': profileDataMap?['img'],
-          'memberConnectionMap': profileDataMap?['memberConnectionMap'],
-        });
+        transaction.update(currentRef, dataToSetOrUpdate);
+        log('Profile data updated for user $currentUserId');
+        log('Updated data: $dataToSetOrUpdate');
       }
     });
+  } catch (e) {
+    log('Transaction failed: $e');
   }
-
+}
   Future<void> getFamilyGroups() async {
     familyGroupsList.clear();
     familyGroupsSnapshots =

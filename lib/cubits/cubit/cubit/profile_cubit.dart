@@ -1,9 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -34,18 +33,16 @@ Map profileDataMap = {};
       emit(ProfilePictureUpdated());
     } else {}
   }
-  saveProfileData() {
 
-  }
    setMemberImage(String image) {
     member?.img = image;
   }
 
   setMemberName(String name) {
-    member?.name = name;
+    profileDataMap["name"] = name;
   }
-  setMemberPhone(String phone) {
-    member?.phone = phone;
+  setMemberPhone() {
+    profileDataMap["phone"] = phoneNumberController.text;
   }
   setMemberFromAddress(String fromAddress) {
    // member?.fromAddress = fromAddress;
@@ -60,15 +57,18 @@ Map profileDataMap = {};
   }
 
   updateProfileDataMap() {
+   /*
     profileDataMap = {
       "name": member?.name,
-    //  "phone": member?.phone,
+      "phone": member?.phone,
       "fromAddress": member?.fromAddress,
       "livingAddress": member?.livingAddress,
       "img": member?.img,
       "memberConnectionMap": member?.memberConnectionMap,
     };
-    
+    */
+    setMemberName(nameController.text);
+    setMemberPhone();
     return profileDataMap;
   }
   

@@ -19,6 +19,8 @@ class MyTxtFormField extends StatelessWidget {
     this.controller,
     this.decoration,
     this.onValidate,
+    this.onFieldSubmitted,
+    this.onEditingComplete,
   });
 
   final String? label;
@@ -36,6 +38,8 @@ class MyTxtFormField extends StatelessWidget {
   final InputDecoration? decoration;
   final Function(String)? onChanged;
   final Function(String?)? onSaved;
+   final Function(String?)? onFieldSubmitted;
+   final void Function()? onEditingComplete ;
   final String? Function(String?)? onValidate;
   @override
   Widget build(BuildContext context) {
@@ -78,6 +82,8 @@ class MyTxtFormField extends StatelessWidget {
           validator: onValidate,
           autovalidateMode: AutovalidateMode.always,
           onSaved: onSaved,
+          onFieldSubmitted:onFieldSubmitted ,
+          onEditingComplete: onEditingComplete,
         ),
       ),
     );

@@ -70,7 +70,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                     familyNamecontroller.text,
                                     familyCode!,
                                   );
-                                  FirebaseServices().getFamilyGroups();
+                                  FirebaseServices().getAllFamilyGroups();
                                   
                                   showToastification(
                                     context: context,

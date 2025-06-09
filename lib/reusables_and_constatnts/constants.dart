@@ -87,10 +87,21 @@ Iterable<LocalizationsDelegate<dynamic>>? KLocalizationsDelegatesconst = [
 Color? KBackgroundColor = const Color(0XFFee0097);
 
 final List<String> KConnectionWaysLabelsList = [
-  "القرية",
-  "المدينة",
-  "المحافظة",
-  "الدولة",
+ ''"Call",
+  "SMS",
+  "WhatsApp",
+  "Telegram",
+  "Facebook",
+  "X (Twitter)",
+  "Messenger",
+  "Instagram",
+  "Gmail",
+  "Yahoo Mail",
+  "YouTube",
+  "TikTok",
+  "LinkedIn",
+  "InstaPay",
+  "PayPal"
 ];
 final String KImgsPath = "assets/images/";
 

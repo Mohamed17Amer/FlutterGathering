@@ -15,11 +15,11 @@ bool isLoading = true;
     emit(CreateGroupSuccess());
   }
 
-  getFamilyGroups()  async{
-firebaseServices.getFamilyGroups()
+  getAllFamilyGroups()  async{
+firebaseServices.getAllFamilyGroups()
   .then((v) {
     isLoading = false;
-     emit(GetFamilyGroupSuccess());
+     emit(getAllFamilyGroupsuccess());
   })
   .catchError((error) {
   });   

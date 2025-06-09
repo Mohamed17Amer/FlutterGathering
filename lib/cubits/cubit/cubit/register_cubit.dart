@@ -50,11 +50,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(AddUserSucceed());
   }
 
-  Future<void> getUsers() async {
+  Future<void> getAllUsers() async {
     firebaseServices
-        .getUsers()
+        .getAllUsers()
         .then((v) {
-          emit(GetUsersFailed());
+          emit(getAllUsersFailed());
         })
         .catchError((error) {});
   }

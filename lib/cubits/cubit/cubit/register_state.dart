@@ -14,5 +14,5 @@ final class VerifyOTPFailed extends RegisterState {}
 
 final class AddUserSucceed extends RegisterState {}
 final class AddUserFailed extends RegisterState {}
-final class GetUsersSuccess extends RegisterState {}
-final class GetUsersFailed extends RegisterState {}
+final class getAllUsersSuccess extends RegisterState {}
+final class getAllUsersFailed extends RegisterState {}

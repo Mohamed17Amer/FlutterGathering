@@ -11,9 +11,8 @@ import '../widgets/custom_txt.dart' show MyText;
 import '../widgets/custom_txt_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key, this.familyGroupMap, this.currentUserId});
+  SignInScreen({super.key, this.familyGroupMap});
   static final id = "/sign_in_screen";
-  int? currentUserId;
   LoginCubit loginCubit = LoginCubit();
   QueryDocumentSnapshot<Map<String, dynamic>>? familyGroupMap;
   FirebaseServices firebaseServices = FirebaseServices();
@@ -65,6 +64,9 @@ class SignInScreen extends StatelessWidget {
                       onPressed:(loginCubit.isFamilyCodeValid==false)?  () async{
                         await firebaseServices.assignUserToGroup(
                       
+                        );
+                        await firebaseServices.getSelectedGroupUsers(
+                          familyGroupMap!['id']!,
                         );
                         
                         regularNavigatioN(context, StartingScreen(familyGroupMap: familyGroupMap,));

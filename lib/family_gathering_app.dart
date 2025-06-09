@@ -4,7 +4,6 @@ import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/phone_number_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
-import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/profile_screen.dart';
 import 'package:family_gathering_v_0/screens/sign_up_screen.dart';
@@ -43,7 +42,7 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
           BlocProvider(create: (context) => PhoneNumberCubit()),
           BlocProvider(create: (context) => ProfileCubit()),
           BlocProvider(
-            create: (context) => CreateGroupCubit()..getFamilyGroups(),
+            create: (context) => CreateGroupCubit()..getAllFamilyGroups(),
           ),
         ],
 
@@ -59,7 +58,7 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
           debugShowCheckedModeBanner: false,
           supportedLocales: KSupportedLocales, //constants file
           localizationsDelegates: KLocalizationsDelegatesconst, //constants file
-          initialRoute: ProfileScreen.id,
+          initialRoute: SignUpScreen.id,
         ),
       ),
     );

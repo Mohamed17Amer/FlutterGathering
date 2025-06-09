@@ -21,6 +21,7 @@ class FirebaseServices {
       [];
   late QuerySnapshot<Map<String, dynamic>> usersSnapshots;
   static List<QueryDocumentSnapshot<Map<String, dynamic>>> usersList = [];
+  static List<QueryDocumentSnapshot<Map<String, dynamic>>> groupUsersList = [];
   String? verificationId;
   static int? currentUserId;
   static int? currentGroupId;
@@ -89,51 +90,66 @@ class FirebaseServices {
     log("User $currentUserId assigned to group $currentGroupId");
   }
 
-Future<void> assignProfileData({Map? profileDataMap}) async {
-  if (profileDataMap == null) {
-    log('profileDataMap is null');
-    return;
-  }
-  
-  final DocumentReference currentRef = usersCollection.doc(currentUserId.toString());
+  Future<void> assignProfileData({Map? profileDataMap}) async {
+    if (profileDataMap == null) {
+      log('profileDataMap is null');
+      return;
+    }
 
-  try {
-    await _firestore.runTransaction((transaction) async {
-      final snapshot = await transaction.get(currentRef);
-      
-      final dataToSetOrUpdate = {
-        'phone': profileDataMap['phone'],
-        'name': profileDataMap['name'],
-        'fromAddress': profileDataMap['fromAddress'],
-        'livingAddress': profileDataMap['livingAddress'],
-        'img': profileDataMap['img'],
-        'memberConnectionMap': profileDataMap['memberConnectionMap'],
-      };
+    final DocumentReference currentRef = usersCollection.doc(
+      currentUserId.toString(),
+    );
 
-      if (!snapshot.exists) {
-        transaction.set(currentRef, dataToSetOrUpdate);
-        log ('Profile data set for user $currentUserId');
-      } else {
-        transaction.update(currentRef, dataToSetOrUpdate);
-        log('Profile data updated for user $currentUserId');
-        log('Updated data: $dataToSetOrUpdate');
-      }
-    });
-  } catch (e) {
-    log('Transaction failed: $e');
+    try {
+      await _firestore.runTransaction((transaction) async {
+        final snapshot = await transaction.get(currentRef);
+
+        final dataToSetOrUpdate = {
+          'phone': profileDataMap['phone'],
+          'name': profileDataMap['name'],
+          'fromAddress': profileDataMap['fromAddress'],
+          'livingAddress': profileDataMap['livingAddress'],
+          'img': profileDataMap['img'],
+          'memberConnectionMap': profileDataMap['memberConnectionMap'],
+        };
+
+        if (!snapshot.exists) {
+          transaction.set(currentRef, dataToSetOrUpdate);
+          log('Profile data set for user $currentUserId');
+        } else {
+          transaction.update(currentRef, dataToSetOrUpdate);
+          log('Profile data updated for user $currentUserId');
+          log('Updated data: $dataToSetOrUpdate');
+        }
+      });
+    } catch (e) {
+      log('Transaction failed: $e');
+    }
   }
-}
-  Future<void> getFamilyGroups() async {
+
+  Future<void> getAllFamilyGroups() async {
     familyGroupsList.clear();
     familyGroupsSnapshots =
         await FirebaseFirestore.instance.collection('familyGroups').get();
     familyGroupsList.addAll(familyGroupsSnapshots.docs);
   }
 
-  Future<void> getUsers() async {
+  Future<void> getAllUsers() async {
     usersList.clear();
     usersSnapshots = await FirebaseFirestore.instance.collection('users').get();
     usersList.addAll(usersSnapshots.docs);
+  }
+
+  Future<void> getSelectedGroupUsers(int groupId) async {
+    groupUsersList.clear();
+    usersSnapshots =
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('groupId', isEqualTo: groupId)
+            .get();
+
+    groupUsersList.addAll(usersSnapshots.docs);
+    log(usersSnapshots.docs.toString());
   }
 
   Future<void> sendOTP(String phone, {required BuildContext context}) async {

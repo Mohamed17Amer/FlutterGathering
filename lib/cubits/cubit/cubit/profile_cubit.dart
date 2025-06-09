@@ -1,8 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
-import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,7 +10,7 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
 
-String? imgPath ;
+  String? imgPath;
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController fromAddressController = TextEditingController();
@@ -21,9 +19,9 @@ String? imgPath ;
   FirebaseServices firebaseServices = FirebaseServices();
 
   Map profileDataMap = {};
-   List<DropDownTextFieldItemModelModel> connectionWaysValuesList = [
-    
-  ];
+  static Map connectionWays = {};
+
+  List<DropDownTextFieldItemModelModel> connectionWaysValuesList = [];
 
   Future<void> pickImage() async {
     emit(ProfilePictureLoading());
@@ -33,19 +31,17 @@ String? imgPath ;
 
     if (picked != null) {
       image = File(picked.path);
-      setMemberImage(image:  image.path);
+      setMemberImage(image: image.path);
       emit(ProfilePictureUpdated());
     } else {}
   }
 
   setMemberImage({String? image}) {
-    if (imgPath == null ) {
+    if (imgPath == null) {
       image = "assets/images/sms.svg"; // default image path
-    }
-    else {
+    } else {
       profileDataMap["img"] = imgPath;
     }
-
   }
 
   setMemberName() {
@@ -67,12 +63,11 @@ String? imgPath ;
   }
 
   setMemberConnectionMap(Map<String?, String?> map) {
-   // member?.memberConnectionMap = map;
+    // member?.memberConnectionMap = map;
   }
 
   updateProfileDataMap() {
- 
- /*
+    /*
     profileDataMap = {
       "name": member?.name,
       "phone": member?.phone,
@@ -82,11 +77,12 @@ String? imgPath ;
       "memberConnectionMap": member?.memberConnectionMap,
     };
 */
-setMemberImage();
+    setMemberImage();
     setMemberName();
     setMemberPhone();
     setMemberFromAddress();
     setMemberLivingAddress();
+    profileDataMap["memberConnectionMap"] = connectionWays;
 
     return profileDataMap;
   }

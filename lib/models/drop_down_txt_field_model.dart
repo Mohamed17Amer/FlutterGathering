@@ -1,9 +1,8 @@
 
 class DropDownTextFieldItemModelModel {
-//  String? selectedOption;
-  //final TextEditingController controller = TextEditingController();
+ 
 
-  void dispose() {
-  //  controller.dispose();
-  }
+ String? way;
+  String? link;
+  DropDownTextFieldItemModelModel({this.way, this.link});
 }

@@ -99,14 +99,12 @@ class ProfileScreen extends StatelessWidget {
                   MyElevatedButton(
                     child: MyText(text: "إضافة طرق الاتصال الأخرى"),
 
-                    onPressed: () {
-                      profileCubit.connectionWaysValuesList.add(
-                       DropDownTextFieldItemModelModel(),
-                      );
-                      
-                    },
+                    onPressed:null
                   ),
-ItemListScreen(),
+SizedBox(
+  height: 400,
+  child: ConnectionWaysDropDownView(),
+  ),
                 ],
               ),
             ),
@@ -129,86 +127,4 @@ ItemListScreen(),
 
 
 
-/****************************** */
-
-class Item {
-  String? category;
-  String? text;
-  Item({this.category, this.text});
-}
-
-class ItemListScreen extends StatefulWidget {
-  @override
-  ItemListScreenState createState() => ItemListScreenState();
-}
-
-class ItemListScreenState extends State<ItemListScreen> {
-  List<Item> items = [];
-
-  List<String> categories = ['Category 1', 'Category 2', 'Category 3'];
-
-  void addItem() {
-    setState(() {
-      items.add(Item());
-    });
-  }
-
-  void removeItem(int index) {
-    setState(() {
-      items.removeAt(index);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (_, index) {
-          final item = items[index];
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                // Add button
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: addItem,
-                ),
-                // Remove button
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () => removeItem(index),
-                ),
-                // Dropdown for category
-                DropdownButton<String>(
-                  value: item.category,
-                  hint: Text('Select category'),
-                  items: categories
-                      .map((cat) => DropdownMenuItem(
-                            child: Text(cat),
-                            value: cat,
-                          ))
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      item.category = val;
-                    });
-                  },
-                ),
-                // TextField for input string
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(hintText: 'Enter text'),
-                    onChanged: (val) {
-                      item.text = val;
-                    },
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    
-  }
-}
+/// ****************************

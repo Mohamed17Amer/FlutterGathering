@@ -7,4 +7,4 @@ final class CreateGroupInitial extends CreateGroupState {}
 
 final class CreateGroupSuccess extends CreateGroupState {}
 
-final class GetFamilyGroupSuccess extends CreateGroupState {}
+final class getAllFamilyGroupsuccess extends CreateGroupState {}

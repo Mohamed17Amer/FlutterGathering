@@ -1,32 +1,95 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
-import 'package:family_gathering_v_0/views/drop_down_txt_field_item.dart';
+import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
+import 'package:family_gathering_v_0/reusables_and_constatnts/constants.dart';
+import 'package:family_gathering_v_0/widgets/custom_txt_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ConnectionWaysDropDownView extends StatelessWidget {
-  ConnectionWaysDropDownView({super.key});
+class ConnectionWaysDropDownView extends StatefulWidget {
+  const ConnectionWaysDropDownView({super.key});
+
+  @override
+  ConnectionWaysDropDownViewState createState() =>
+      ConnectionWaysDropDownViewState();
+}
+
+class ConnectionWaysDropDownViewState
+    extends State<ConnectionWaysDropDownView> {
+  List<DropDownTextFieldItemModelModel> items = [];
   ProfileCubit profileCubit = ProfileCubit();
 
   @override
+  void initState() {
+    super.initState();
+
+    items.add(DropDownTextFieldItemModelModel());
+    ProfileCubit.connectionWays = {};
+  }
+
+  void addItem() {
+    setState(() {
+      items.add(DropDownTextFieldItemModelModel());
+    });
+  }
+
+  void removeItem(int index) {
+    setState(() {
+      items.removeAt(index);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 300,
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          return ListView.builder(
-            itemCount:
-                profileCubit.connectionWaysValuesList.isEmpty
-                    ? 1
-                    : profileCubit.connectionWaysValuesList.length,
-            itemBuilder: (context, index) {
-              return DropdownTextFieldsItem(
-                index: index,
-                items: profileCubit.connectionWaysValuesList,
-              );
-            },
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (_, index) {
+        final item = items[index];
+
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Add button
+              IconButton(icon: Icon(Icons.add), onPressed: addItem),
+
+              // Dropdown for way
+              DropdownButton<String>(
+                value: item.way,
+                hint: Text(' اختر طريقة '),
+                items:
+                    KConnectionWaysLabelsList.map(
+                      (way) => DropdownMenuItem(value: way, child: Text(way)),
+                    ).toList(),
+                onChanged: (val) {
+                  setState(() {
+                    item.way = val;
+                  });
+                },
+              ),
+              SizedBox(width: 10),
+              // TextField for input string
+              Expanded(
+                child: MyTxtFormField(
+                  decoration: InputDecoration(hintText: 'انسخ رابط التواصل'),
+                  onChanged: (val) {
+                    item.link = val;
+                    ProfileCubit.connectionWays[item.way] = val;
+                  },
+                ),
+              ),
+              // Remove button
+              if (index == 0)
+                SizedBox(width: 50)
+              else
+                IconButton(
+                  icon: Icon(Icons.remove),
+                  onPressed: () => removeItem(index),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

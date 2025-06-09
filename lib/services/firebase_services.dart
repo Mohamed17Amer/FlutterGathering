@@ -10,9 +10,7 @@ class FirebaseServices {
   CollectionReference familyGroupsCollection = FirebaseFirestore.instance
       .collection('familyGroups');
 
-  CollectionReference usersCollection = FirebaseFirestore.instance.collection(
-    'users',
-  );
+  final usersCollection = FirebaseFirestore.instance.collection('users');
 
   CollectionReference countersCollection = FirebaseFirestore.instance
       .collection('counters');
@@ -21,7 +19,7 @@ class FirebaseServices {
       [];
   late QuerySnapshot<Map<String, dynamic>> usersSnapshots;
   static List<QueryDocumentSnapshot<Map<String, dynamic>>> usersList = [];
-  static List<QueryDocumentSnapshot<Map<String, dynamic>>> groupUsersList = [];
+  static final groupUsersList = [];
   String? verificationId;
   static int? currentUserId;
   static int? currentGroupId;
@@ -142,14 +140,19 @@ class FirebaseServices {
 
   Future<void> getSelectedGroupUsers(int groupId) async {
     groupUsersList.clear();
-    usersSnapshots =
-        await FirebaseFirestore.instance
-            .collection('users')
-            .where('groupId', isEqualTo: groupId)
-            .get();
+    usersSnapshots = await usersCollection.get();
 
-    groupUsersList.addAll(usersSnapshots.docs);
-    log(usersSnapshots.docs.toString());
+    if (usersSnapshots.docs.isEmpty) {
+      log("No users found with groupId: $groupId");
+    } else {
+      for (var doc in usersSnapshots.docs) {
+        var user = doc.data();
+        if (user['groupId'][0] == groupId) {
+          groupUsersList.add(user);
+        }
+        log(groupUsersList.toString()); // XRjre8 //kkstBX
+      }
+    }
   }
 
   Future<void> sendOTP(String phone, {required BuildContext context}) async {

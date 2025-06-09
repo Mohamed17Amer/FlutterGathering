@@ -81,11 +81,11 @@ class FirebaseServices {
     log("User added with ID: $newUserId");
   }
 
-  Future<void> assignUserToGroup() async {
+  Future<void> assignUserToGroup({required int groupId}) async {
     await usersCollection.doc(currentUserId.toString()).update({
-      'groupId': FieldValue.arrayUnion([currentGroupId]),
+      'groupId': FieldValue.arrayUnion([groupId!]),
     });
-    log("User $currentUserId assigned to group $currentGroupId");
+    log("User $currentUserId assigned to group $groupId");
   }
 
   Future<void> assignProfileData({Map? profileDataMap}) async {
@@ -147,11 +147,14 @@ class FirebaseServices {
     } else {
       for (var doc in usersSnapshots.docs) {
         var user = doc.data();
-        if (user['groupId'][0] == groupId) {
+        // log(user['groupId'][0].runtimeType.toString() );
+
+        if ((user['groupId'] as List).contains(groupId)) {
           groupUsersList.add(user);
+          log(user.toString());
         }
-        log(groupUsersList.toString()); // XRjre8 //kkstBX
       }
+      log("final" + groupUsersList.toString()); // XRjre8 //kkstBX  //AgoYg0
     }
   }
 

@@ -63,6 +63,8 @@ class SignInScreen extends StatelessWidget {
                     return MyElevatedButton(
                       onPressed:(loginCubit.isFamilyCodeValid==false)?  () async{
                         await firebaseServices.assignUserToGroup(
+                          groupId: familyGroupMap!['id']!,
+                          
                       
                         );
                         await firebaseServices.getSelectedGroupUsers(

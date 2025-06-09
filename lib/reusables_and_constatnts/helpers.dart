@@ -19,8 +19,8 @@ Map<String, Widget Function(BuildContext)> KRoutesMap = {
   SelectGroupScreen.id: (context) =>  SelectGroupScreen(),
   CreateGroupScreen.id: (context) =>  CreateGroupScreen(),
   StartingScreen.id: (context) =>  StartingScreen(),
-  HomeScreen.id: (context) => const HomeScreen(),
-  PhoneAuthScreen.id: (context) => const PhoneAuthScreen(),
+  HomeScreen.id: (context) =>  HomeScreen(),
+  PhoneAuthScreen.id: (context) =>  PhoneAuthScreen(),
   ProfileScreen.id: (context) => ProfileScreen(),
 };
 

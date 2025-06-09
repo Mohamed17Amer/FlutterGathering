@@ -14,9 +14,9 @@ class MemberProfileModel extends HiveObject {
     String? phone;
 
   @HiveField(3)
-   AddressModel? fromAddress;
+   String? fromAddress;
   @HiveField(4)
-   AddressModel? livingAddress;
+   String? livingAddress;
 
    Map<String?, String?>? memberConnectionMap;
 

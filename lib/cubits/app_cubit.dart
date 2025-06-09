@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:family_gathering_v_0/models/group_model.dart';
 import 'package:family_gathering_v_0/screens/home_screen.dart';
 import 'package:family_gathering_v_0/screens/manage_screen.dart';
 import 'package:family_gathering_v_0/screens/profile_screen.dart';
@@ -10,6 +11,8 @@ part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
+
+  static late  GroupModel? currentGroup;
 
   int selectedIndex = 0;
 

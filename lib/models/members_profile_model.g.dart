@@ -20,8 +20,8 @@ class MemberProfileModelAdapter extends TypeAdapter<MemberProfileModel> {
       img: fields[0] as String?,
       name: fields[1] as String?,
       phone: fields[2] as String?,
-      fromAddress: fields[3] as AddressModel?,
-      livingAddress: fields[4] as AddressModel?,
+      fromAddress: fields[3] as String?,
+      livingAddress: fields[4] as String?,
     );
   }
 

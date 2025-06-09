@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
+import 'package:family_gathering_v_0/models/group_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:family_gathering_v_0/screens/starting_family_gathering_app.dart';
@@ -11,10 +12,10 @@ import '../widgets/custom_txt.dart' show MyText;
 import '../widgets/custom_txt_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key, this.familyGroupMap});
+  SignInScreen({super.key,  this.groupModel});
   static final id = "/sign_in_screen";
   LoginCubit loginCubit = LoginCubit();
-  QueryDocumentSnapshot<Map<String, dynamic>>? familyGroupMap;
+  GroupModel? groupModel;
   FirebaseServices firebaseServices = FirebaseServices();
 
   @override
@@ -54,25 +55,32 @@ class SignInScreen extends StatelessWidget {
                   onSaved: (val) {},
                   onValidate: (val) {
                     return loginCubit.validateFamilyCode(
-                      familyGroupMap?['code'],loginCubit
+                      groupModel!.code!,
+                      loginCubit,
                     );
                   },
                 ),
                 BlocBuilder<LoginCubit, LoginState>(
                   builder: (context, state) {
                     return MyElevatedButton(
-                      onPressed:(loginCubit.isFamilyCodeValid==false)?  () async{
-                        await firebaseServices.assignUserToGroup(
-                          groupId: familyGroupMap!['id']!,
-                          
-                      
-                        );
-                        await firebaseServices.getSelectedGroupUsers(
-                          familyGroupMap!['id']!,
-                        );
-                        
-                        regularNavigatioN(context, StartingScreen(familyGroupMap: familyGroupMap,));
-                      }: null,
+                      onPressed:
+                          (loginCubit.isFamilyCodeValid == false)
+                              ? () async {
+                                await firebaseServices.assignUserToGroup(
+                                  groupId: groupModel!.id!,
+                                );
+                                await firebaseServices.getSelectedGroupUsers(
+                                  groupModel!.id!,
+                                );
+
+                                regularNavigatioN(
+                                  context,
+                                  StartingScreen(
+                                    groupModel: groupModel,
+                                  ),
+                                );
+                              }
+                              : null,
                       child: MyText(text: "دخول العيلة"),
                     );
                   },

@@ -39,8 +39,7 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () {
                             profileCubit.pickImage();
                           },
-                          child: MySvg(svgImgPath: "assets/images/sms.svg")
-                      
+                          child: MySvg(svgImgPath: "assets/images/sms.svg"),
                         );
                       },
                     ),
@@ -48,10 +47,9 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: 20),
                   MyTxtFormField(
                     controller: profileCubit.nameController,
-                    label:"اسمك",
+                    label: "اسمك",
                     keyboardType: TextInputType.name,
                     maxLength: 30,
-                                       
                   ),
                   SizedBox(height: 10),
                   MyTxtFormField(
@@ -99,12 +97,9 @@ class ProfileScreen extends StatelessWidget {
                   MyElevatedButton(
                     child: MyText(text: "إضافة طرق الاتصال الأخرى"),
 
-                    onPressed:null
+                    onPressed: null,
                   ),
-SizedBox(
-  height: 400,
-  child: ConnectionWaysDropDownView(),
-  ),
+                  SizedBox(height: 400, child: ConnectionWaysDropDownView()),
                 ],
               ),
             ),
@@ -112,8 +107,10 @@ SizedBox(
         ),
 
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            profileCubit.assignProfileData();
+          onPressed: () async {
+       
+          await  profileCubit.assignProfileData();
+        
           },
           elevation: 20,
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -124,7 +121,5 @@ SizedBox(
     );
   }
 }
-
-
 
 /// ****************************

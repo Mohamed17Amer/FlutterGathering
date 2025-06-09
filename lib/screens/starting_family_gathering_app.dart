@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/cubits/app_cubit.dart';
+import 'package:family_gathering_v_0/models/group_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,8 +11,8 @@ import '../views/bottom_nav_bar_view.dart';
 
 class StartingScreen extends StatefulWidget {
   static final String id = "/statring_screen";
-  QueryDocumentSnapshot? familyGroupMap;
-  StartingScreen({super.key, this.familyGroupMap});
+  GroupModel? groupModel;
+  StartingScreen({super.key, this.groupModel});
 
   @override
   State<StartingScreen> createState() => _StartingScreenState();
@@ -17,6 +20,12 @@ class StartingScreen extends StatefulWidget {
 
 class _StartingScreenState extends State<StartingScreen> {
   AppCubit appCubit = AppCubit();
+  @override
+  void initState() {
+    super.initState();
+    AppCubit.currentGroup=widget.groupModel;
+
+  }
 
   // void _onNavigationItemBarTapped(int index) {
   @override
@@ -31,7 +40,7 @@ class _StartingScreenState extends State<StartingScreen> {
               bottomNavigationBarItems: appCubit.bottomNavigationBarItems,
               selectedIndex: appCubit.selectedIndex,
               onNavigationItemBarTapped: (index) {
-                print("Selected index: $index");
+                log("Selected index: $index");
 
                 setState(() {
                 appCubit.changeTabeIndex(index);

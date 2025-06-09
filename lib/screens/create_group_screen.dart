@@ -1,4 +1,5 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/create_group_cubit.dart';
+import 'package:family_gathering_v_0/models/group_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
@@ -25,6 +26,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   bool isCodeGenerated = false;
 
   CreateGroupCubit createGroupCubit = CreateGroupCubit();
+ late GroupModel? groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,9 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                                  await createGroupCubit.addNewFamilyGroup(
                                     familyNamecontroller.text,
                                     familyCode!,
-                                  );
+                                  ).then((value) {
+
+                                  });
                                   FirebaseServices().getAllFamilyGroups();
                                   
                                   showToastification(

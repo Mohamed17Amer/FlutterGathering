@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   static final id = "/home_screen";
   FirebaseServices firebaseServices = FirebaseServices();
 
-  HomeScreen({super.key, QueryDocumentSnapshot? familyGroupMap});
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               livingAddress:
                   FirebaseServices.groupUsersList[index]['livingAddress'],
 
-              //memberConnectionMap: FirebaseServices.groupUsersList[index]['memberConnectionMap'],
+              memberConnectionMap: FirebaseServices.groupUsersList[index]['memberConnectionMap'],
             );
             return MembersListNiewItem(memberModel: memberModel);
           },

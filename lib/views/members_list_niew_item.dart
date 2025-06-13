@@ -19,8 +19,8 @@ class MembersListNiewItem extends StatelessWidget {
         SizedBox(
           height: 16,
         ),
-        MemberConnectionsGridView(),
-      ]),
+        MemberConnectionsGridView( connectionWaysMap: memberModel.memberConnectionMap,),
+      ]), 
     );
   }
 }

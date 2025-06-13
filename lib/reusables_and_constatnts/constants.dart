@@ -197,3 +197,4 @@ final List<MemberConnectionWayModel> connectionWaysList = [
     onConnectionWayPressed: () {},
   ),
 ];
+

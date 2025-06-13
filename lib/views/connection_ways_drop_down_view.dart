@@ -74,7 +74,7 @@ class ConnectionWaysDropDownViewState
                   decoration: InputDecoration(hintText: 'انسخ رابط التواصل'),
                   onChanged: (val) {
                     item.link = val;
-                    ProfileCubit.connectionWays[item.way] = val;
+                    ProfileCubit.connectionWays![item.way] = val;
                   },
                 ),
               ),

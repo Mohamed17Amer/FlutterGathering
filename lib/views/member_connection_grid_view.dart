@@ -11,7 +11,8 @@ import 'member_connection_grid_view_item.dart';
 
 
 class MemberConnectionsGridView extends StatefulWidget {
-  const MemberConnectionsGridView({super.key});
+   MemberConnectionsGridView({super.key,required this.connectionWaysMap});
+  Map? connectionWaysMap={};
 
   @override
   State<MemberConnectionsGridView> createState() =>

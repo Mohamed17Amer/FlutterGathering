@@ -11,7 +11,7 @@ import '../widgets/custom_txt.dart' show MyText;
 import '../widgets/custom_txt_field.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({super.key,  this.groupModel});
+  SignInScreen({super.key, this.groupModel});
   static final id = "/sign_in_screen";
   LoginCubit loginCubit = LoginCubit();
   GroupModel? groupModel;
@@ -68,16 +68,18 @@ class SignInScreen extends StatelessWidget {
                                 await firebaseServices.assignUserToGroup(
                                   groupId: groupModel!.id!,
                                 );
-                                await firebaseServices.getSelectedGroupUsers(
-                                  groupModel!.id!,
-                                );
-
-                                regularNavigatioN(
-                                  context,
-                                  StartingScreen(
-                                    groupModel: groupModel,
-                                  ),
-                                );
+                                await firebaseServices
+                                    .getSelectedGroupUsers(groupModel!.id!)
+                                    .then((_) {
+                                      Future.delayed(
+                                        const Duration(seconds:2 ),
+                                        
+                                      );
+                                      regularNavigatioN(
+                                        context,
+                                        StartingScreen(groupModel: groupModel),
+                                      );
+                                    });
                               }
                               : null,
                       child: MyText(text: "دخول العيلة"),

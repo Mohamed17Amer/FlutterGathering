@@ -17,7 +17,7 @@ class MemberProfileModel extends HiveObject {
   @HiveField(4)
    String? livingAddress;
 
-   Map<String?, String?>? memberConnectionMap;
+   Map<String?, dynamic>? memberConnectionMap;
 
   MemberProfileModel( {
     this.img,

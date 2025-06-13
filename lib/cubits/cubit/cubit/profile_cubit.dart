@@ -19,7 +19,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   FirebaseServices firebaseServices = FirebaseServices();
 
   Map profileDataMap = {};
-  static Map connectionWays = {};
+  static Map<String?,String?>? connectionWays = {};
 
   List<DropDownTextFieldItemModelModel> connectionWaysValuesList = [];
 

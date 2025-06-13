@@ -108,7 +108,7 @@ class FirebaseServices {
           'fromAddress': profileDataMap['fromAddress'],
           'livingAddress': profileDataMap['livingAddress'],
           'img': profileDataMap['img'],
-          'memberConnectionMap': profileDataMap['memberConnectionMap'],
+          'memberConnectionMap': profileDataMap['memberConnectionMap']??{},
         };
 
         if (!snapshot.exists) {

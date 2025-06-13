@@ -46,12 +46,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   setMemberName() {
     profileDataMap["name"] = nameController.text;
-    //log("name ${profileDataMap["name"]}");
   }
 
   setMemberPhone() {
     profileDataMap["phone"] = phoneNumberController.text;
-    //log("name ${ profileDataMap["name"]}");
   }
 
   setMemberFromAddress() {
@@ -63,7 +61,6 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   setMemberConnectionMap(Map<String?, String?> map) {
-    // member?.memberConnectionMap = map;
   }
 
   updateProfileDataMap() {

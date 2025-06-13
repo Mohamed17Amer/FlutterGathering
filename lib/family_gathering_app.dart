@@ -5,7 +5,6 @@ import 'package:family_gathering_v_0/cubits/cubit/cubit/phone_number_cubit.dart'
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/cubits/cubit/cubit/register_cubit.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
-import 'package:family_gathering_v_0/screens/profile_screen.dart';
 import 'package:family_gathering_v_0/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';

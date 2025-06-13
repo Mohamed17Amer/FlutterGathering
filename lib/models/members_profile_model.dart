@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 
-import 'address_model.dart';
 
 
 part 'members_profile_model.g.dart';

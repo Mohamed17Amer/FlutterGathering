@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:family_gathering_v_0/models/member_conniction_way_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/constants.dart';
@@ -9,10 +10,9 @@ import 'package:toastification/toastification.dart';
 import '../widgets/custom_txt.dart';
 import 'member_connection_grid_view_item.dart';
 
-
 class MemberConnectionsGridView extends StatefulWidget {
-   MemberConnectionsGridView({super.key,required this.connectionWaysMap});
-  Map? connectionWaysMap={};
+  MemberConnectionsGridView({super.key, required this.connectionWaysMap});
+  Map connectionWaysMap = {};
 
   @override
   State<MemberConnectionsGridView> createState() =>
@@ -29,8 +29,19 @@ class _MemberConnectionsGridViewState extends State<MemberConnectionsGridView>
   void initState() {
     super.initState();
 
-    _connectionsMenuController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _connectionsMenuController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+  log(widget.connectionWaysMap.toString());
+
+    // Initialize the animation controller to a collapsed state
+    if (_isMenuCollapsed) {
+      _connectionsMenuController.value = 0.0; // Collapsed state
+    } else {
+      _connectionsMenuController.value = 1.0; // Expanded state
+    }
   }
 
   @override
@@ -50,9 +61,7 @@ class _MemberConnectionsGridViewState extends State<MemberConnectionsGridView>
           width: 2.00,
           strokeAlign: BorderSide.strokeAlignInside,
         ),
-        borderRadius: BorderRadius.all(
-          Radius.circular(16.00),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(16.00)),
       ),
       trailing: IconButton(
         splashRadius: 50,
@@ -73,20 +82,23 @@ class _MemberConnectionsGridViewState extends State<MemberConnectionsGridView>
           //   _connectionsMenuController.reverse();
           // }
         },
-        icon: Lottie.asset(Useanimations.menuV3,
-            controller: _connectionsMenuController,
-            height: 60,
-            fit: BoxFit.fitHeight),
+        icon: Lottie.asset(
+          Useanimations.menuV3,
+          controller: _connectionsMenuController,
+          height: 60,
+          fit: BoxFit.fitHeight,
+        ),
       ),
       title: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.00, vertical: 2.00),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.00),
-            border: Border.all(
-              color: const Color(0xFFE0E0E0),
-              width: 2.00,
-              strokeAlign: BorderSide.strokeAlignInside,
-            )),
+          borderRadius: BorderRadius.circular(16.00),
+          border: Border.all(
+            color: const Color(0xFFE0E0E0),
+            width: 2.00,
+            strokeAlign: BorderSide.strokeAlignInside,
+          ),
+        ),
         child: MyText(
           text: " طرق التواصل أو الاتصال",
           color: Colors.white,
@@ -99,17 +111,25 @@ class _MemberConnectionsGridViewState extends State<MemberConnectionsGridView>
           padding: const EdgeInsets.symmetric(horizontal: 8.00),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 16.00,
-                mainAxisSpacing: 16.00),
+              crossAxisCount: 4,
+              crossAxisSpacing: 16.00,
+              mainAxisSpacing: 16.00,
+            ),
             itemBuilder: (context, index) {
-              MemberConnectionWayModel memberConnectionWayModel =
-                  connectionWaysList[index];
+
+             late MemberConnectionWayModel memberConnectionWayModel;
+              for (var element in connectionWaysList.toList()) {
+                if (element.keys.first ==
+                    widget.connectionWaysMap!.keys.toList()[index]) {
+                  memberConnectionWayModel = element.values.first;
+                }
+              }
+
               return MemberConnectionsGridViewItem(
                 memberConnectionWayModel: memberConnectionWayModel,
               );
             },
-            itemCount: connectionWaysList.length,
+            itemCount: widget.connectionWaysMap!.keys.toList().length,
           ),
         ),
       ],

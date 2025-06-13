@@ -105,6 +105,7 @@ final List<String> KConnectionWaysLabelsList = [
 ];
 final String KImgsPath = "assets/images/";
 
+/*
 final List<MemberConnectionWayModel> connectionWaysList = [
   MemberConnectionWayModel(
     connectionImgPath:
@@ -198,3 +199,96 @@ final List<MemberConnectionWayModel> connectionWaysList = [
   ),
 ];
 
+*/
+final List<Map<String, MemberConnectionWayModel>> connectionWaysList = [
+  {
+    "Call": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "call.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "SMS": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "sms.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "WhatsApp": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "whatsapp.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "Telegram": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "telegram.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "Facebook": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "facebook.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "X (Twitter)": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "x.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "Messenger": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "messenger.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "Instagram": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "instagram.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "Gmail": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "gmail.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "Yahoo Mail": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "yahoo.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "YouTube": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "youtube.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "TikTok": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "tiktok.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "LinkedIn": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "linkedin.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "InstaPay": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "instapay.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+  {
+    "PayPal": MemberConnectionWayModel(
+      connectionImgPath: "$KImgsPath" "paypal.svg",
+      onConnectionWayPressed: () {},
+    ),
+  },
+];

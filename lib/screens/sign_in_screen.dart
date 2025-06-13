@@ -72,14 +72,14 @@ class SignInScreen extends StatelessWidget {
                                     .getSelectedGroupUsers(groupModel!.id!)
                                     .then((_) {
                                       Future.delayed(
-                                        const Duration(seconds:2 ),
-                                        
-                                      );
-                                      regularNavigatioN(
-                                        context,
-                                        StartingScreen(groupModel: groupModel),
+                                        const Duration(seconds: 2),
                                       );
                                     });
+
+                                regularNavigatioN(
+                                  context,
+                                  StartingScreen(groupModel: groupModel),
+                                );
                               }
                               : null,
                       child: MyText(text: "دخول العيلة"),

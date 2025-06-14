@@ -10,3 +10,4 @@ final class ProfilePictureUpdated extends ProfileState {}
 final class TestState extends ProfileState {
   
 }
+final class GetCurrentUserDataState extends ProfileState{}

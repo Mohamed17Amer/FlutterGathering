@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
+import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -88,4 +89,33 @@ class ProfileCubit extends Cubit<ProfileState> {
     final dataMap = updateProfileDataMap();
     firebaseServices.assignProfileData(profileDataMap: dataMap);
   }
+
+static MemberProfileModel? currentUser= MemberProfileModel(
+  name: "اسمك",
+  phone: "رقم التليفون",
+  img: "assets/images/sms.svg", 
+  fromAddress: "محل الميلاد",
+  livingAddress: "محل الإقامة",
+
+    );
+    Future getCurrentUserData() async {
+   await firebaseServices.getCurrentUserData();
+   currentUser = FirebaseServices.currentUser??MemberProfileModel(
+  name: "اسمك",
+  phone: "رقم التليفون",
+  img: "assets/images/sms.svg", 
+  fromAddress: "محل الميلاد",
+  livingAddress: "محل الإقامة",
+
+    );
+
+    nameController.text = currentUser!.name!;
+    phoneNumberController.text = currentUser!.phone!; 
+    fromAddressController.text = currentUser!.fromAddress!;
+    livingAddressController.text = currentUser!.livingAddress!;
+    imgPath = currentUser!.img;
+    emit(GetCurrentUserDataState());
+
+
+    }
 }

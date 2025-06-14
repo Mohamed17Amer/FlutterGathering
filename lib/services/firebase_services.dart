@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,6 +24,7 @@ class FirebaseServices {
   String? verificationId;
   static int? currentUserId;
   static int? currentGroupId;
+  static MemberProfileModel? currentUser;
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -108,7 +110,7 @@ class FirebaseServices {
           'fromAddress': profileDataMap['fromAddress'],
           'livingAddress': profileDataMap['livingAddress'],
           'img': profileDataMap['img'],
-          'memberConnectionMap': profileDataMap['memberConnectionMap']??{},
+          'memberConnectionMap': profileDataMap['memberConnectionMap'] ?? {},
         };
 
         if (!snapshot.exists) {
@@ -148,13 +150,38 @@ class FirebaseServices {
       for (var doc in usersSnapshots.docs) {
         var user = doc.data();
 
-        if  ((user['groupId'] !=null)&&(user['groupId'] as List).contains(groupId)) {
+        if ((user['groupId'] != null) &&
+            (user['groupId'] as List).contains(groupId)) {
           groupUsersList.add(user);
           log(user.toString());
         }
       }
-      log("final$groupUsersList"); 
+      log("final$groupUsersList");
     }
+  }
+
+  Future<void> getCurrentUserData() async {
+   
+  // Reference to the user document with the specified ID
+  DocumentSnapshot userDoc = await usersCollection.doc(currentUserId.toString()).get();
+
+  if (!userDoc.exists) {
+    log("User with ID $currentUserId not found");
+  } else  {
+    var user = userDoc.data()  as Map<String, dynamic>? ;
+    currentUser = MemberProfileModel(
+      name: user?['name']  ??  "اسمك",
+      phone: user?['phone'] ?? "رقم التليفون",
+      img: user?['img'] ?? "assets/images/sms.svg",
+      fromAddress: user?['fromAddress'] ?? "محل الميلاد",
+      livingAddress: user?['livingAddress'] ?? "محل الإقامة",
+    );
+    // Now, 'user' contains the data of the specific user
+    log("User data: $user");
+        log("curent user: ${currentUser!.name}");
+
+  }
+
   }
 
   Future<void> sendOTP(String phone, {required BuildContext context}) async {

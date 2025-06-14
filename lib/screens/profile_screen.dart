@@ -59,7 +59,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 20),
                         MyTxtFormField(
                           controller: profileCubit.nameController,
-                          label: profileCubit.nameController.text,
+                          label: (profileCubit.nameController.text.isEmpty)
+                              ? "الاسم بالكامل"
+                              : profileCubit.nameController.text,
                           hint: "الاسم بالكامل",
 
                           keyboardType: TextInputType.name,
@@ -68,7 +70,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 10),
                         MyTxtFormField(
                           controller: profileCubit.phoneNumberController,
-                          label: profileCubit.phoneNumberController.text,
+                          label: (profileCubit.phoneNumberController.text.isEmpty)?
+                              "رقم التليفون"
+                              : profileCubit.phoneNumberController.text,
                           hint: "رقم التليفون",
                           keyboardType: TextInputType.phone,
                           maxLength: 12,
@@ -84,7 +88,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               // Use Expanded here inside Row to fill remaining space
                               child: MyTxtFormField(
                                 controller: profileCubit.fromAddressController,
-                                label: profileCubit.fromAddressController.text,
+                                label: (profileCubit.fromAddressController.text.isEmpty)
+                                    ? " اتولدت فين"
+                                    : profileCubit.fromAddressController.text,
                                 hint:" اتولدت فين",
                                 keyboardType: TextInputType.text,
                                 maxLength: 30,
@@ -104,7 +110,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 controller:
                                     profileCubit.livingAddressController,
                                 label:
-                                    profileCubit.livingAddressController.text,
+                                   ( profileCubit.livingAddressController.text.isEmpty)
+                                        ? "بتعيش فين"
+                                        : profileCubit.livingAddressController.text,
                                 hint: "بتعيش فين",
                                 keyboardType: TextInputType.text,
                                 maxLength: 30,

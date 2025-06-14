@@ -58,10 +58,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         SizedBox(height: 20),
                         MyTxtFormField(
-                          controller: profileCubit.nameController,
-                          label: (profileCubit.nameController.text.isEmpty)
-                              ? "الاسم بالكامل"
-                              : profileCubit.nameController.text,
+                          controller: ProfileCubit.nameController,
+                          label: 
+                               ProfileCubit.nameController.text,
                           hint: "الاسم بالكامل",
 
                           keyboardType: TextInputType.name,
@@ -69,10 +68,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         SizedBox(height: 10),
                         MyTxtFormField(
-                          controller: profileCubit.phoneNumberController,
-                          label: (profileCubit.phoneNumberController.text.isEmpty)?
-                              "رقم التليفون"
-                              : profileCubit.phoneNumberController.text,
+                          controller: ProfileCubit.phoneNumberController,
+                          label: ProfileCubit.phoneNumberController.text,
                           hint: "رقم التليفون",
                           keyboardType: TextInputType.phone,
                           maxLength: 12,
@@ -87,10 +84,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Expanded(
                               // Use Expanded here inside Row to fill remaining space
                               child: MyTxtFormField(
-                                controller: profileCubit.fromAddressController,
-                                label: (profileCubit.fromAddressController.text.isEmpty)
-                                    ? " اتولدت فين"
-                                    : profileCubit.fromAddressController.text,
+                                controller: ProfileCubit.fromAddressController,
+                                label:  ProfileCubit.fromAddressController.text,
                                 hint:" اتولدت فين",
                                 keyboardType: TextInputType.text,
                                 maxLength: 30,
@@ -108,11 +103,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Expanded(
                               child: MyTxtFormField(
                                 controller:
-                                    profileCubit.livingAddressController,
+                                    ProfileCubit.livingAddressController,
                                 label:
-                                   ( profileCubit.livingAddressController.text.isEmpty)
-                                        ? "بتعيش فين"
-                                        : profileCubit.livingAddressController.text,
+                                   ProfileCubit.livingAddressController.text,
                                 hint: "بتعيش فين",
                                 keyboardType: TextInputType.text,
                                 maxLength: 30,
@@ -138,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               floatingActionButton: FloatingActionButton(
                 onPressed: () async {
                   await profileCubit.assignProfileData();
-                  //    await profileCubit.getCurrentUserData();
+                //  await profileCubit.getCurrentUserData();
                 },
                 elevation: 20,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

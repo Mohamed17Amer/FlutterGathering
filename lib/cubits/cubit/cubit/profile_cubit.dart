@@ -11,18 +11,18 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());
 
-  String? imgPath;
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController fromAddressController = TextEditingController();
-  TextEditingController livingAddressController = TextEditingController();
+ static String? imgPath;
+ static TextEditingController nameController = TextEditingController();
+  static TextEditingController phoneNumberController = TextEditingController();
+  static TextEditingController fromAddressController = TextEditingController();
+  static TextEditingController livingAddressController = TextEditingController();
+  static Map<String?, String?>? connectionWaysMapController = {};
+
 
   FirebaseServices firebaseServices = FirebaseServices();
 
-  Map profileDataMap = {};
-  static Map<String?,String?>? connectionWays = {};
+ static Map profileDataMap = {};
 
-  List<DropDownTextFieldItemModelModel> connectionWaysValuesList = [];
 
   Future<void> pickImage() async {
     emit(ProfilePictureLoading());
@@ -61,26 +61,17 @@ class ProfileCubit extends Cubit<ProfileState> {
     profileDataMap["livingAddress"] = livingAddressController.text;
   }
 
-  setMemberConnectionMap(Map<String?, String?> map) {
+  setMemberConnectionMap() {
+    profileDataMap["memberConnectionMap"] = connectionWaysMapController;
   }
 
   updateProfileDataMap() {
-    /*
-    profileDataMap = {
-      "name": member?.name,
-      "phone": member?.phone,
-      "fromAddress": member?.fromAddress,
-      "livingAddress": member?.livingAddress,
-      "img": member?.img,
-      "memberConnectionMap": member?.memberConnectionMap,
-    };
-*/
     setMemberImage();
     setMemberName();
     setMemberPhone();
     setMemberFromAddress();
     setMemberLivingAddress();
-    profileDataMap["memberConnectionMap"] = connectionWays;
+    setMemberConnectionMap();
 
     return profileDataMap;
   }
@@ -90,32 +81,18 @@ class ProfileCubit extends Cubit<ProfileState> {
     firebaseServices.assignProfileData(profileDataMap: dataMap);
   }
 
-static MemberProfileModel? currentUser= MemberProfileModel(
-  name: "اسمك",
-  phone: "رقم التليفون",
-  img: "assets/images/sms.svg", 
-  fromAddress: "محل الميلاد",
-  livingAddress: "محل الإقامة",
+  static MemberProfileModel? currentUser;
+  
+  Future getCurrentUserData() async {
+    await firebaseServices.getCurrentUserData();
+    currentUser = FirebaseServices.currentUser;
 
-    );
-    Future getCurrentUserData() async {
-   await firebaseServices.getCurrentUserData();
-   currentUser = FirebaseServices.currentUser??MemberProfileModel(
-  name: "اسمك",
-  phone: "رقم التليفون",
-  img: "assets/images/sms.svg", 
-  fromAddress: "محل الميلاد",
-  livingAddress: "محل الإقامة",
-
-    );
 
     nameController.text = currentUser!.name!;
-    phoneNumberController.text = currentUser!.phone!; 
+    phoneNumberController.text = currentUser!.phone!;
     fromAddressController.text = currentUser!.fromAddress!;
     livingAddressController.text = currentUser!.livingAddress!;
     imgPath = currentUser!.img;
     emit(GetCurrentUserDataState());
-
-
-    }
+  }
 }

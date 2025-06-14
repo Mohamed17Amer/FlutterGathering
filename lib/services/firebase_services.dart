@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/screens/select_group_screen.dart';
@@ -168,14 +169,17 @@ class FirebaseServices {
   if (!userDoc.exists) {
     log("User with ID $currentUserId not found");
   } else  {
-    var user = userDoc.data()  as Map<String, dynamic>? ;
+    var user =   userDoc.data()  as Map<String, dynamic>? ;
     currentUser = MemberProfileModel(
       name: user?['name']  ??  "اسمك",
       phone: user?['phone'] ?? "رقم التليفون",
       img: user?['img'] ?? "assets/images/sms.svg",
-      fromAddress: user?['fromAddress'] ?? "محل الميلاد",
-      livingAddress: user?['livingAddress'] ?? "محل الإقامة",
+      fromAddress: user?['fromAddress'] ?? " اتولدت فين",
+      livingAddress: user?['livingAddress'] ?? "بتعيش فين",
     );
+    ProfileCubit.currentUser = currentUser;
+
+    
     // Now, 'user' contains the data of the specific user
     log("User data: $user");
         log("curent user: ${currentUser!.name}");

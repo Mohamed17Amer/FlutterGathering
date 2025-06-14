@@ -1,4 +1,5 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/login_cubit.dart';
+import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
 import 'package:family_gathering_v_0/models/group_model.dart';
 import 'package:family_gathering_v_0/reusables_and_constatnts/helpers.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
@@ -16,6 +17,7 @@ class SignInScreen extends StatelessWidget {
   LoginCubit loginCubit = LoginCubit();
   GroupModel? groupModel;
   FirebaseServices firebaseServices = FirebaseServices();
+  ProfileCubit profileCubit = ProfileCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +71,11 @@ class SignInScreen extends StatelessWidget {
                                   groupId: groupModel!.id!,
                                 );
                                 await firebaseServices
-                                    .getSelectedGroupUsers(groupModel!.id!)
-                                    .then((_) {
-                                      Future.delayed(
-                                        const Duration(seconds: 2),
-                                      );
-                                    });
+                                    .getSelectedGroupUsers(groupModel!.id!);
+                                  
+                                  await profileCubit.getCurrentUserData(
+                                   
+                                  );
 
                                 regularNavigatioN(
                                   context,

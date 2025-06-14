@@ -22,7 +22,7 @@ class ConnectionWaysDropDownViewState
     super.initState();
 
     items.add(DropDownTextFieldItemModelModel());
-    ProfileCubit.connectionWays = {};
+    ProfileCubit.connectionWaysMapController = {};
   }
 
   void addItem() {
@@ -74,7 +74,7 @@ class ConnectionWaysDropDownViewState
                   decoration: InputDecoration(hintText: 'انسخ رابط التواصل'),
                   onChanged: (val) {
                     item.link = val;
-                    ProfileCubit.connectionWays![item.way] = val;
+                    ProfileCubit.connectionWaysMapController![item.way] = val;
                   },
                 ),
               ),

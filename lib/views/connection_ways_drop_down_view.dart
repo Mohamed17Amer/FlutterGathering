@@ -22,7 +22,15 @@ class ConnectionWaysDropDownViewState
     super.initState();
 
     items.add(DropDownTextFieldItemModelModel());
-    ProfileCubit.connectionWaysMapController = {};
+
+    for (var element in  ProfileCubit.currentUser!.memberConnectionMap!.entries.toList()){
+
+      items.add(DropDownTextFieldItemModelModel(
+        way: element.key,
+        link: element.value,
+      ));
+    }
+   // ProfileCubit.connectionWaysMapController = {};
   }
 
   void addItem() {

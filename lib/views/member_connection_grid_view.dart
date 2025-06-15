@@ -120,7 +120,7 @@ class _MemberConnectionsGridViewState extends State<MemberConnectionsGridView>
              late MemberConnectionWayModel memberConnectionWayModel;
               for (var element in connectionWaysList.toList()) {
                 if (element.keys.first ==
-                    widget.connectionWaysMap!.keys.toList()[index]) {
+                    widget.connectionWaysMap.keys.toList()[index]) {
                   memberConnectionWayModel = element.values.first;
                 }
               }
@@ -129,7 +129,7 @@ class _MemberConnectionsGridViewState extends State<MemberConnectionsGridView>
                 memberConnectionWayModel: memberConnectionWayModel,
               );
             },
-            itemCount: widget.connectionWaysMap!.keys.toList().length,
+            itemCount: widget.connectionWaysMap.keys.toList().length,
           ),
         ),
       ],

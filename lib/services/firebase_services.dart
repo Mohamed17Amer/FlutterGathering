@@ -176,6 +176,7 @@ class FirebaseServices {
       img: user?['img'] ?? "assets/images/sms.svg",
       fromAddress: user?['fromAddress'] ?? " اتولدت فين",
       livingAddress: user?['livingAddress'] ?? "بتعيش فين",
+      memberConnectionMap: user?['memberConnectionMap'] ?? {},
     );
     ProfileCubit.currentUser = currentUser;
 

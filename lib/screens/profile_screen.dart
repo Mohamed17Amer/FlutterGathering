@@ -14,7 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileScreen extends StatefulWidget {
   static String id = "/profile_screen";
 
-  ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -131,7 +131,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               floatingActionButton: FloatingActionButton(
                 onPressed: () async {
                   await profileCubit.assignProfileData();
-                //  await profileCubit.getCurrentUserData();
                 },
                 elevation: 20,
                 clipBehavior: Clip.antiAliasWithSaveLayer,

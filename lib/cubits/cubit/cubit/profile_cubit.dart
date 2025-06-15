@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:bloc/bloc.dart';
-import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
 import 'package:family_gathering_v_0/models/members_profile_model.dart';
 import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   static TextEditingController phoneNumberController = TextEditingController();
   static TextEditingController fromAddressController = TextEditingController();
   static TextEditingController livingAddressController = TextEditingController();
-  static Map<String?, String?>? connectionWaysMapController = {};
+  static Map<String?, dynamic>? connectionWaysMapController = {};
 
 
   FirebaseServices firebaseServices = FirebaseServices();
@@ -93,6 +92,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     fromAddressController.text = currentUser!.fromAddress!;
     livingAddressController.text = currentUser!.livingAddress!;
     imgPath = currentUser!.img;
+    connectionWaysMapController = currentUser!.memberConnectionMap;
     emit(GetCurrentUserDataState());
   }
 }

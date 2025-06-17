@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/member_conniction_way_model.dart';
 
 
-String KMembersProfileBox = "members_profile_box";
+String  KMembersProfileBox = "members_profile_box";
 Iterable<Locale> KSupportedLocales = const [
   Locale("af"),
   Locale("am"),

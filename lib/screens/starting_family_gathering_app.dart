@@ -13,6 +13,8 @@ class StartingScreen extends StatefulWidget {
   GroupModel? groupModel;
   StartingScreen({super.key, this.groupModel});
 
+  
+
   @override
   State<StartingScreen> createState() => _StartingScreenState();
 }

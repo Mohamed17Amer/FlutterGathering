@@ -75,6 +75,8 @@ class FirebaseServices {
         transaction.update(counterRef, {'count': newUserId});
       }
     });
+    // user  name 
+    // user group id  7,9
 
     await usersCollection.doc(newUserId.toString()).set({
       'phone': userPhone,

@@ -15,26 +15,33 @@ import '../screens/starting_family_gathering_app.dart';
 Map<String, Widget Function(BuildContext)> KRoutesMap = {
   SignUpScreen.id: (context) => SignUpScreen(),
   SignInScreen.id: (context) => SignInScreen(),
-
-  SelectGroupScreen.id: (context) =>  SelectGroupScreen(),
-  CreateGroupScreen.id: (context) =>  CreateGroupScreen(),
-  StartingScreen.id: (context) =>  StartingScreen(),
-  HomeScreen.id: (context) =>  HomeScreen(),
-  PhoneAuthScreen.id: (context) =>  PhoneAuthScreen(),
+  SelectGroupScreen.id: (context) => SelectGroupScreen(),
+  CreateGroupScreen.id: (context) => CreateGroupScreen(),
+  StartingScreen.id: (context) => StartingScreen(),
+  HomeScreen.id: (context) => HomeScreen(),
+  PhoneAuthScreen.id: (context) => PhoneAuthScreen(),
   ProfileScreen.id: (context) => ProfileScreen(),
 };
 
+
 // Function to navigate to a new screen
 // Takes a BuildContext and a Widget as parameters
-void navigateTo(BuildContext context, String screenId, ) {
-  
+void navigateTo(BuildContext context, String screenId) {
   Navigator.push(context, MaterialPageRoute(builder: KRoutesMap[screenId]!));
 }
 
-void regularNavigatioN(BuildContext context, Widget screen, ) {
-  
+void regularNavigatioN(BuildContext context, Widget screen) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
 }
+
+// countries
+// phone auth
+// ui
+// refresh code
+// otp ver
+// snakbar
+//navigation
+//onGenerateRoute
 
 Set<String> existingCodes = {}; // Set to store existing codes
 String generateCode(int length, Set<String> existingCodes) {
@@ -68,23 +75,18 @@ copyToClipboard({String? text}) {
   Clipboard.setData(ClipboardData(text: text!));
 }
 
-
 void showMessage(String message, BuildContext context) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
-  }
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+}
 
+generateRandomColor() {
+  final random = Random();
+  final color = Color.fromARGB(
+    255, // full opacity
+    random.nextInt(256), // red
+    random.nextInt(256), // green
+    random.nextInt(256), // blue
+  );
 
-     generateRandomColor() {
-    final random = Random();
-    final  color = Color.fromARGB(
-        255, // full opacity
-        random.nextInt(256), // red
-        random.nextInt(256), // green
-        random.nextInt(256), // blue
-      );
-
-      return color;
-   
-  }
+  return color;
+}

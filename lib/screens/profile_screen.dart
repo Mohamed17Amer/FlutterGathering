@@ -1,9 +1,5 @@
 import 'package:family_gathering_v_0/cubits/cubit/cubit/profile_cubit.dart';
-import 'package:family_gathering_v_0/models/drop_down_txt_field_model.dart';
-import 'package:family_gathering_v_0/models/members_profile_model.dart';
-import 'package:family_gathering_v_0/services/firebase_services.dart';
 import 'package:family_gathering_v_0/views/connection_ways_drop_down_view.dart';
-import 'package:family_gathering_v_0/views/drop_down_txt_field_item.dart';
 import 'package:family_gathering_v_0/widgets/custom_elevated_button.dart';
 import 'package:family_gathering_v_0/widgets/custom_svg_img.dart';
 import 'package:family_gathering_v_0/widgets/custom_txt.dart';

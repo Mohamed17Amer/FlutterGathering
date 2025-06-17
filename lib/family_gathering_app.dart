@@ -55,7 +55,7 @@ class _FamilyGatheringAppState extends State<FamilyGatheringApp> {
             useMaterial3: true,
           ),
           debugShowCheckedModeBanner: false,
-          supportedLocales: KSupportedLocales, //constants file
+          supportedLocales: KSupportedLocales,  //constants file
           localizationsDelegates: KLocalizationsDelegatesconst, //constants file
           initialRoute: SignUpScreen.id,
         ),
